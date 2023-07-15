@@ -1,14 +1,12 @@
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var cors = require('cors');
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const cors = require('cors');
 
-var usersRouter = require("./routes/users");
-var travelsRouter = require("./routes/travels");
-var adminRouter = require("./routes/admin");
+const usersRouter = require("./routes/users")
 
-var app = express();
+const app = express();
 
 app.use(
     cors({
@@ -23,7 +21,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/users", usersRouter);
-app.use("/travels", travelsRouter);
-app.use("/admin", adminRouter);
+
 
 module.exports = app;
