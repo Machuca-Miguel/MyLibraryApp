@@ -47,12 +47,12 @@ database: 'nombre_de_tu_base_de_datos'
 
 1. Desde el directorio raíz del proyecto, ejecuta el siguiente comando para iniciar el servidor backend:
 
-npm run start
+npm run dev
 
 
 2. Navega hasta el directorio `client` dentro del proyecto y ejecuta el siguiente comando para iniciar el servidor de desarrollo del frontend:
 
-npm run start
+npm run dev
 
 
 3. Accede a la aplicación en tu navegador web utilizando la dirección [http://localhost:3000](http://localhost:3000).
@@ -69,6 +69,88 @@ Si deseas contribuir a este proyecto, puedes realizar los siguientes pasos:
 ## Autor
 
 Miguel Machuca: https://www.linkedin.com/in/miguel-machuca/
+
+
+
+<------------------------------------------------------------------------------------------------------------------------------------------------------>
+
+# MyLibrary
+
+
+
+MyLibrary is a web application that allows users to store, organize, and rate books, as well as add friends. The application is built with JavaScript (Node.js) on the backend and React on the frontend.
+
+## Features
+
+- User Registration: Users can create an account in the application by providing their name, email address, and password.
+- Login: Users can log in to the application using their registered email and password.
+- Book Management: Users can add books to their personal library, mark books as read or in progress, and track their reading progress.
+- Ratings and Reviews: Users can assign a rating and add comments for the books they have read.
+- Friends List: Users can search for and add friends to their network within the application.
+- Intuitive Interface: The application offers a modern and user-friendly interface with clear navigation and search/filtering options.
+
+## Technologies Used
+
+- Backend: JavaScript (Node.js), Express.js, MySQL as the relational database.
+- Frontend: React.js, ReactBootstrap, and Axios for HTTP requests.
+
+## Installation
+
+1. Clone this repository to your local machine.
+2. Navigate to the root directory of the server project.
+3. Run the following command to install the backend dependencies:
+
+      $ npm install
+
+4. Navigate to the root directory of the client project.
+5. Run the following command to install the frontend dependencies:
+
+      $ npm install
+
+      
+## Database Configuration
+
+1. Create a MySQL database on your local server or a database hosting service.
+2. Open the `config.js` file located in the root directory of the project.
+3. Update the configuration values for the database connection according to your own credentials:
+
+
+host: 'localhost',
+user: 'your_user',
+password: 'your_password',
+database: 'your_database_name';
+
+
+## Ejecución
+
+1. From the root directory of the project, run the following command to start the backend server:
+
+npm run dev
+
+
+2. Navigate to the client directory within the project and run the following command to start the frontend development server:
+
+npm run dev
+
+
+3. Access the application in your web browser using the address http://localhost:3000.
+
+## Contribución
+
+If you wish to contribute to this project, you can follow these steps:
+
+1. Fork this repository.
+2. Create a branch with a clear description of the feature or fix you plan to add.
+3. Make the changes in your branch.
+4. Submit a pull request describing the changes you have made.
+
+## Autor
+
+Miguel Machuca: https://www.linkedin.com/in/miguel-machuca/
+
+
+
+
 
 
 
