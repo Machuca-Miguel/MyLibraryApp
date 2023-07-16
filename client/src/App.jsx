@@ -1,16 +1,16 @@
-import { RoutesApp } from './routes/RoutesApp'
+import { RoutesApp } from "./routes/RoutesApp";
 
-
-import './App.css'
+import "./App.css";
+import { AppProvider } from "./context/AppProvider";
 
 function App() {
- 
-
   return (
     <>
-     <RoutesApp/>
+      <AppProvider>
+        <RoutesApp />
+      </AppProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

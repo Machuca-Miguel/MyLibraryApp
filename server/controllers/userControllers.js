@@ -10,7 +10,6 @@ class userControllers {
   createUser = (req, res) => {
     // Get data from inputs
     const { user_name, name, last_name, age, email, password } = req.body;
-    console.log(req.body.name);
 
     let saltRounds = 8;
     // Hashing password
@@ -34,8 +33,8 @@ class userControllers {
   //http://localhost:4000/users/login
 
   login = (req, res) => {
+    console.log("reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeq",req.body);
     let { email, password } = req.body;
-    console.log(req.body);
     let sql = `SELECT * FROM user WHERE email = '${email}'`;
 
     connection.query(sql, (error, result) => {
@@ -96,7 +95,7 @@ class userControllers {
     let id = req.params.user_id;
 
     let sqlUser = `SELECT * FROM user WHERE user_id = ${id} and is_deleted = 0`;
-    let sqlBook = `SELECT * FROM book WHERE user_id = ${id} and is_deleted = 0`;
+    let sqlBook = `SELECT book.*, user_book.* FROM user JOIN user_book ON user.user_id = user_book.user_id JOIN book ON user_book.book_id = book.book_id WHERE user.is_deleted = 0 AND book.is_deleted = 0 AND user.user_id = ${id}`;
 
     connection.query(sqlUser, (error, resultUser) => {
       if (error) {

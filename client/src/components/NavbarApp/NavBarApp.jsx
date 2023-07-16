@@ -8,7 +8,7 @@ import "../../../public/styles/navbar/navbarStyle.scss"
 export const NavBarApp = () => {
   const navigate = useNavigate();
   return (
-    <Navbar expand="lg" className="bg-body-tertiary navbarApp" bg="dark" data-bs-theme="dark">
+    <Navbar expand="lg" className="bg-body-tertiary navbarApp " bg="dark" data-bs-theme="dark">
           <Container fluid>
             <Navbar.Brand as={Link} to="/" className='ps-3'>My Library</Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} />
