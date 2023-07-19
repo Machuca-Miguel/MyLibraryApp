@@ -1,7 +1,11 @@
 import React from 'react'
 
+import "../../../../public/styles/allBooks/allBooksStyle.scss"
+
 export const AllBooks = () => {
   return (
-    <div>AllBooks</div>
+    <div className='sectionBgPpalAllBooks'>
+        SearchCard
+    </div>
   )
 }

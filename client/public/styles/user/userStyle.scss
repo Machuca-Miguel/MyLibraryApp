@@ -1,0 +1,395 @@
+.sectionBgPpal {
+  min-height: calc(100vh - 50px);
+  width: 100%;
+  background-image: url("/images/appImages/fondo2.jpg");
+  position: fixed;
+  bottom: 0;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+.userContentPpal {
+  width: 100%;
+  padding: calc(4vh + 50px) 4vw 4vh 4vw;
+  color: rgb(0, 0, 0);
+  display: grid;
+  box-sizing: border-box;
+  grid-template:
+    "userCard progressCard progressCard progressCard"
+    "achievementCard myBookshelfcard  myBookshelfcard myBookshelfcard"
+    "none myBookshelfcard myBookshelfcard myBookshelfcard";
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto 15vh 40vh;
+  grid-gap: 1.5rem;
+
+  .userCard:hover,
+  .progressCard:hover,
+  .myBookshelfcard:hover,
+  .achievementCard:hover {
+    transition: 0.2s;
+    box-shadow: 0px 1px 16px 2px rgba(0, 0, 0, 1);
+    -webkit-box-shadow: 0px 1px 16px 2px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 0px 1px 16px 2px rgba(0, 0, 0, 1);
+  }
+
+  .userCard {
+    background-color: transparent;
+    backdrop-filter: blur(4px);
+    border: 1px solid #7f6044;
+    grid-area: userCard;
+    padding: 2vh 2vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-radius: 8px;
+    
+
+    .headlineCont {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+   
+
+    .cardTitle {
+      text-transform: capitalize;
+    }
+
+    .profile_img {
+      width: 70px;
+      aspect-ratio: 1 / 1;
+      border-radius: 100%;
+      border: 2px solid;
+      outline: 1px solid;
+      outline-offset: 2px;
+    }
+
+    .cardInfo {
+      align-self: start;
+      margin-bottom: 10px;
+
+      p {
+        margin: 0;
+      }
+    }
+
+    .cardNavigation {
+      align-self: end;
+    }
+
+  
+  }
+
+  .progressCard {
+    background-color: transparent;
+    backdrop-filter: blur(4px);
+    grid-area: progressCard;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 2vh 2vw;
+    border-radius: 8px;
+    border: 1px solid #7f6044;
+
+    h3 {
+      font-size: clamp(1.5rem, 3vh, 2rem);
+    }
+
+    .booksList {
+      padding: 0px 1vw;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+
+      .listedBook {
+        width: 100%;
+        display: grid;
+        grid-template: "title progressReadingContent pages";
+        grid-template-columns: 2fr 3fr 1fr;
+        align-items: center;
+        grid-gap: 10px;
+
+        p,
+        h5 {
+          margin: 0;
+        }
+
+        .title {
+          grid-area: title;
+        }
+
+        .progressReadingContent {
+          grid-area: progressReadingContent;
+          .progressReadingBar {
+            background-color: #dfdfdf;
+            border: 0.5px solid #7f6044;
+          }
+          .progress-bar {
+            background-color: #c1aba6;
+            -webkit-animation: progress-bar 0.8s ease-out both;
+                    animation: progress-bar 0.8s ease-out both;
+          }
+    
+          
+         
+          @keyframes progress-bar {
+            0% {
+              -webkit-transform: scaleX(0.4);
+                      transform: scaleX(0.4);
+              -webkit-transform-origin: 0% 0%;
+                      transform-origin: 0% 0%;
+            }
+            100% {
+              -webkit-transform: scaleX(1);
+                      transform: scaleX(1);
+              -webkit-transform-origin: 0% 0%;
+                      transform-origin: 0% 0%;
+            }
+          }
+        }
+
+        .pages {
+          grid-area: pages;
+        }
+      }
+    }
+  }
+
+  .myBookshelfcard {
+    background-color: #c1aba6;
+    border-radius: 8px;
+    grid-area: myBookshelfcard;
+    padding: 2vh 2vw;
+    display: flex;
+    flex-direction: column;
+
+    .titleBookshelf {
+      height: 6vh;
+
+      h3,
+      hr {
+        margin: 0;
+        font-size: clamp(1.5rem, 4vh, 3rem);
+      }
+    }
+
+    .triptych {
+      height: calc(100% - 6vh);
+      display: grid;
+      grid-column-gap: 1%;
+      grid-template: "readBook readingBook toRead whislist";
+      grid-template-columns: 23% 23% 23% 23%;
+      grid-template-rows: 100%;
+      align-items: center;
+      justify-content: space-evenly;
+      text-align: center;
+
+      .readBook {
+        grid-area: readBook;
+      }
+
+      .readingBook {
+        grid-area: readingBook;
+      }
+
+      .toRead {
+        grid-area: toRead;
+      }
+
+      .whislist {
+        grid-area: whislist;
+      }
+
+      .readBook,
+      .readingBook,
+      .toRead,
+      .whislist {
+        height: 99%;
+        padding: 1vh 0vw;
+        background-color: rgb(237, 225, 209);
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border: 1px solid #7f6044;
+
+        .coverCont {
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+
+          img {
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 9/16;
+            object-fit: contain;
+            object-position: center;
+          }
+        }
+        .titleCont {
+          height: 8vh;
+          display: grid;
+          place-items: center;
+
+          h6 {
+            margin-bottom: 0;
+            font-size: 1rem;
+          }
+        }
+      }
+
+      .readBook:hover,
+      .readingBook:hover,
+      .toRead:hover,
+      .whislist:hover {
+        cursor: pointer;
+        color: rgb(237, 225, 209);
+        background-color: #a3b18a;
+        font-size: x-large;
+        box-shadow: 0px 1px 16px 2px rgba(0, 0, 0, 1);
+        -webkit-box-shadow: 0px 1px 16px 2px rgba(0, 0, 0, 1);
+        -moz-box-shadow: 0px 1px 16px 2px rgba(0, 0, 0, 1);
+
+        img {
+          transition: 0.5s;
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+
+  .achievementCard {
+    background-color: #a3b18a;
+    border-radius: 8px;
+    grid-area: achievementCard;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    h3 {
+      font-size: clamp(1.5rem, 3vh, 2rem);
+    }
+    .cardContent {
+      display: grid;
+      grid-template: "year bar percentage";
+      grid-template-columns: 12% 65% 12%;
+      align-items: center;
+      grid-column-gap: 5%;
+
+      h6 {
+        margin: 0;
+      }
+
+      .progressReadingBar {
+        grid-area: bar;
+        background-color: #dfdfdf;
+      }
+      .progress-bar {
+        background-color: #c1aba6;
+        -webkit-animation: progress-bar 0.8s ease-out both;
+        animation: progress-bar 0.8s ease-out both;
+      }
+
+      
+      @-webkit-keyframes progress-bar {
+        0% {
+          -webkit-transform: scaleX(0.4);
+                  transform: scaleX(0.4);
+          -webkit-transform-origin: 0% 0%;
+                  transform-origin: 0% 0%;
+        }
+        100% {
+          -webkit-transform: scaleX(1);
+                  transform: scaleX(1);
+          -webkit-transform-origin: 0% 0%;
+                  transform-origin: 0% 0%;
+        }
+      }
+      @keyframes scale-up-hor-left {
+        0% {
+          -webkit-transform: scaleX(0.4);
+                  transform: scaleX(0.4);
+          -webkit-transform-origin: 0% 0%;
+                  transform-origin: 0% 0%;
+        }
+        100% {
+          -webkit-transform: scaleX(1);
+                  transform: scaleX(1);
+          -webkit-transform-origin: 0% 0%;
+                  transform-origin: 0% 0%;
+        }
+      }
+    }
+  }
+}
+
+
+
+@media (max-width: 1200px) {
+  .userContentPpal {
+    height: 100vh;
+    grid-template:
+      "userCard progressCard"
+      "achievementCard progressCard"
+      "myBookshelfcard myBookshelfcard";
+    grid-template-columns: 40% 60%;
+    grid-template-rows: 34% 12% 53%;
+    // align-items: start;
+
+    .progressCard {
+      .booksList {
+        .listedBook {
+          grid-template:
+            "title title"
+            "progressReadingContent pages";
+          grid-template-columns: 80% 20%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+}
+
+@media (max-width: 600px) {
+  .userContentPpal {
+    grid-template:
+      "userCard"
+      "progressCard"
+      "achievementCard"
+      "myBookshelfcard";
+    grid-template-rows: auto auto auto auto;
+
+    .progressCard {
+      .booksList {
+        .listedBook {
+          grid-template:
+            "title title"
+            "progressReadingContent pages";
+          grid-template-columns: 65% 30%;
+        }
+      }
+    }
+
+    .myBookshelfcard {
+      .triptych {
+        grid-template:
+          "readBook "
+          "readingBook"
+          "toRead "
+          "whislist";
+        grid-template-columns: 100%;
+        grid-template-rows:  50vh 50vh 50vh 50vh;
+
+        
+      }
+    }
+  }
+}

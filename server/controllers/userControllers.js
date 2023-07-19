@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 class userControllers {
   //-----------------------------------------------------
-  //1. Create new User
+  //1.-Create new User
   //http://localhost:4000/users/createUser
 
   createUser = (req, res) => {
@@ -29,7 +29,7 @@ class userControllers {
   };
 
   //-----------------------------------------------------
-  //2. Login
+  //2.-Login
   //http://localhost:4000/users/login
 
   login = (req, res) => {
@@ -88,14 +88,21 @@ class userControllers {
   };
 
   //------------------------------------------------------
-  //3.-Get all user info
+  //3.-Get all data from user
   //http://localhost:4000/users/oneUser/:user_id
 
   getOneUser = (req, res) => {
     let id = req.params.user_id;
 
     let sqlUser = `SELECT * FROM user WHERE user_id = ${id} and is_deleted = 0`;
-    let sqlBook = `SELECT book.*, user_book.* FROM user JOIN user_book ON user.user_id = user_book.user_id JOIN book ON user_book.book_id = book.book_id WHERE user.is_deleted = 0 AND book.is_deleted = 0 AND user.user_id = ${id}`;
+    let sqlBook = `SELECT book.*, user_book.*, author.*
+    FROM user
+    JOIN user_book ON user.user_id = user_book.user_id
+    JOIN book ON user_book.book_id = book.book_id
+    JOIN author ON book.author_id = author.author_id
+    WHERE user.is_deleted = 0
+      AND book.is_deleted = 0
+      AND user.user_id = ${id}`;
 
     connection.query(sqlUser, (error, resultUser) => {
       if (error) {
@@ -113,6 +120,33 @@ class userControllers {
       });
     });
   };
+
+  //------------------------------------------------------
+//4.-Edit user data
+//http://localhost:4000/users/oneUser/userEdition/:user_id ;
+  editOneUser = (req, res) => {
+    const user_id = req.params.user_id;
+    const { user_name, name, last_name, age } = req.body;
+
+    let img = ""
+
+    let sql = `UPDATE user SET user_name = "${user_name}", name = "${name}", last_name = "${last_name}", age = ${age} WHERE user_id = ${user_id}`;
+
+    if(req.file !=undefined){
+      img = req.file.filename
+     
+
+      sql =  `UPDATE user SET user_name = "${user_name}", name = "${name}", last_name = "${last_name}", age = ${age}, profile_img = "${img}" WHERE user_id = ${user_id}`
+    }
+
+    connection.query(sql, (err, result) => {
+      err
+      ? res.status(400).json({ err })
+      : res.status(200).json({ result, img });
+    });
+
+
+  }
 }
 
 module.exports = new userControllers();

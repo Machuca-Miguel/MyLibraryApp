@@ -1,0 +1,11 @@
+.sectionBgPpalAllBooks {
+    min-height: calc(100vh - 50px);
+    width: 100%;
+    background-image: url("/images/appImages/fondo2.jpg");
+    position: fixed;
+    bottom: 0;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1;
+  }

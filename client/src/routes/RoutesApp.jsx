@@ -23,6 +23,7 @@ import { BookRegister } from '../pages/Admin/AdminBooks/BookRegister/BookRegiste
 import { BookEdition } from '../pages/Admin/AdminBooks/BookEdition/BookEdition';
 import { AdminStats } from '../pages/Admin/Adminstats/AdminStats';
 import { AdminUser } from '../pages/Admin/AdminUsers/AdminUser';
+import { MyBookshelf } from '../pages/books/Bookshelf/MyBookshelf/MyBookshelf';
 
 export const RoutesApp = () => {
   return (
@@ -35,7 +36,8 @@ export const RoutesApp = () => {
             <Route path="/user" element={<User/>}/>
             <Route path="/userEdition" element={<UserEdition/>}/>
             <Route path="/allBooks" element={<AllBooks/>}/>
-            <Route path="/bookshelf" element={<Bookshelf/>}>
+            <Route path="/bookshelf" element={<Bookshelf/>}/>
+            <Route path="/mybookshelf" element={<MyBookshelf/>}>
 
                 <Route path="read" element={<ReadBooks/>}/>
                 <Route path="toRead" element={<BooksToRead/>}/>
