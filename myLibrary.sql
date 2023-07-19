@@ -46,9 +46,10 @@ CREATE TABLE book (
 CREATE TABLE user_book (
     user_id INT UNSIGNED,
     book_id INT UNSIGNED,
-    is_read_date DATE,
-    to_read_date DATE,
-    wishlist_date DATE,
+    is_read_date DATE DEFAULT null,
+    to_read_date DATE DEFAULT null,
+    added_reading_date DATE DEFAULT null,
+    wishlist_date DATE DEFAULT null,
     current_page INT UNSIGNED,
     format VARCHAR(50),
     rating DECIMAL(3,2),
@@ -111,18 +112,20 @@ VALUES
     (1, 'Book10', 'Young Adult', 'Paperback', 'cover10.jpg', 400, 2013, 5319764208, 'Sinopsis10');
 
 
-INSERT INTO user_book (user_id, book_id, is_read_date, to_read_date, wishlist_date, current_page, format, rating, mood, comments)
+INSERT INTO user_book (user_id, book_id, is_read_date, added_reading_date, to_read_date, wishlist_date, current_page, format, rating, mood, comments)
 VALUES
-    (1, 1, '2023-06-01', NULL, '2023-07-15', 150, 'Paperback', 4.5, 'Happy', 'Comment1'),
-    (2, 2, '2023-06-02', '2023-07-16', NULL, 250, 'Hardcover', 3.8, 'Excited', 'Comment2'),
-    (3, 3, '2023-06-03', NULL, NULL, 200, 'E-book', 4.2, 'Inspired', 'Comment3'),
-    (4, 4, NULL, '2023-07-15', '2023-07-16', 100, 'Paperback', NULL, NULL, 'Comment4'),
-    (5, 5, '2023-06-05', NULL, '2023-07-15', 300, 'Hardcover', 4.7, 'Thrilled', 'Comment5'),
-    (6, 6, NULL, '2023-07-16', NULL, 0, 'E-book', NULL, NULL, 'Comment6'),
-    (7, 7, NULL, NULL, '2023-07-15', 0, 'Paperback', NULL, NULL, 'Comment7'),
-    (8, 8, NULL, '2023-07-16', '2023-07-16', 0, 'Hardcover', NULL, NULL, 'Comment8'),
-    (9, 9, '2023-06-09', NULL, NULL, 0, 'E-book', 3.9, 'Motivated', 'Comment9'),
-    (10, 10, '2023-06-10', '2023-07-15', '2023-07-15', 0, 'Paperback', 4.4, 'Curious', 'Comment10');
+    (1, 1, '2023-06-01', '2023-06-02', NULL, '2023-07-15', 150, 'Paperback', 4.5, 'Happy', 'Comment1'),
+    (2, 2, '2023-06-02', NULL, '2023-07-16', NULL, 250, 'Hardcover', 3.8, 'Excited', 'Comment2'),
+    (3, 3, '2023-06-03', NULL, NULL, '2023-07-15', 200, 'E-book', 4.2, 'Inspired', 'Comment3'),
+    (4, 4, NULL, '2023-07-15', '2023-07-16', NULL, 100, 'Paperback', NULL, NULL, 'Comment4'),
+    (5, 5, '2023-06-05', NULL, '2023-07-15', NULL, 300, 'Hardcover', 4.7, 'Thrilled', 'Comment5'),
+    (6, 6, NULL, '2023-07-16', NULL, NULL, 0, 'E-book', NULL, NULL, 'Comment6'),
+    (7, 7, NULL, NULL, '2023-07-15', NULL, 0, 'Paperback', NULL, NULL, 'Comment7'),
+    (8, 8, NULL, '2023-07-16', '2023-07-16', NULL, 0, 'Hardcover', NULL, NULL, 'Comment8'),
+    (9, 9, '2023-06-09', NULL, NULL, NULL, 0, 'E-book', 3.9, 'Motivated', 'Comment9'),
+    (10, 10, '2023-06-10', '2023-07-15', '2023-07-15', NULL, 0, 'Paperback', 4.4, 'Curious', 'Comment10');
+
+
 
 
 INSERT INTO friendship (user_id_1, user_id_2)
@@ -143,8 +146,5 @@ SELECT * FROM author;
 SELECT * FROM book;
 SELECT * FROM user_book;
 SELECT * FROM friendship;
-
-
-
 
 
