@@ -1,3 +1,5 @@
+@import "../variables/variables";
+
 .sectionBgPpal {
   min-height: calc(100vh - 50px);
   width: 100%;
@@ -14,7 +16,6 @@
   padding: calc(4vh + 50px) 4vw 4vh 4vw;
   color: rgb(0, 0, 0);
   display: grid;
-  box-sizing: border-box;
   grid-template:
     "userCard progressCard progressCard progressCard"
     "achievementCard myBookshelfcard  myBookshelfcard myBookshelfcard"
@@ -27,16 +28,15 @@
   .progressCard:hover,
   .myBookshelfcard:hover,
   .achievementCard:hover {
-    transition: 0.2s;
-    box-shadow: 0px 1px 16px 2px rgba(0, 0, 0, 1);
-    -webkit-box-shadow: 0px 1px 16px 2px rgba(0, 0, 0, 1);
-    -moz-box-shadow: 0px 1px 16px 2px rgba(0, 0, 0, 1);
+    box-shadow: $blackShadow;
+    -webkit-box-shadow: $blackShadow;
+    -moz-box-shadow: $blackShadow;
   }
 
   .userCard {
     background-color: transparent;
     backdrop-filter: blur(4px);
-    border: 1px solid #7f6044;
+    border: 1px solid $borderColor;
     grid-area: userCard;
     padding: 2vh 2vw;
 
@@ -45,15 +45,12 @@
     justify-content: space-between;
     align-items: flex-start;
     border-radius: 8px;
-    
 
     .headlineCont {
       display: flex;
       align-items: center;
       gap: 16px;
     }
-
-   
 
     .cardTitle {
       text-transform: capitalize;
@@ -80,8 +77,6 @@
     .cardNavigation {
       align-self: end;
     }
-
-  
   }
 
   .progressCard {
@@ -93,7 +88,7 @@
     justify-content: space-evenly;
     padding: 2vh 2vw;
     border-radius: 8px;
-    border: 1px solid #7f6044;
+    border: 1px solid $borderColor;
 
     h3 {
       font-size: clamp(1.5rem, 3vh, 2rem);
@@ -126,29 +121,27 @@
         .progressReadingContent {
           grid-area: progressReadingContent;
           .progressReadingBar {
-            background-color: #dfdfdf;
-            border: 0.5px solid #7f6044;
+            background-color: $bgColorLightGray;
+            border: 0.5px solid $borderColor;
           }
           .progress-bar {
             background-color: #c1aba6;
             -webkit-animation: progress-bar 0.8s ease-out both;
-                    animation: progress-bar 0.8s ease-out both;
+            animation: progress-bar 0.8s ease-out both;
           }
-    
-          
-         
+
           @keyframes progress-bar {
             0% {
               -webkit-transform: scaleX(0.4);
-                      transform: scaleX(0.4);
+              transform: scaleX(0.4);
               -webkit-transform-origin: 0% 0%;
-                      transform-origin: 0% 0%;
+              transform-origin: 0% 0%;
             }
             100% {
               -webkit-transform: scaleX(1);
-                      transform: scaleX(1);
+              transform: scaleX(1);
               -webkit-transform-origin: 0% 0%;
-                      transform-origin: 0% 0%;
+              transform-origin: 0% 0%;
             }
           }
         }
@@ -211,12 +204,12 @@
       .whislist {
         height: 99%;
         padding: 1vh 0vw;
-        background-color: rgb(237, 225, 209);
+        background-color: $bgColorLightCream;
         border-radius: 8px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        border: 1px solid #7f6044;
+        border: 1px solid $borderColor;
 
         .coverCont {
           width: 100%;
@@ -248,12 +241,12 @@
       .toRead:hover,
       .whislist:hover {
         cursor: pointer;
-        color: rgb(237, 225, 209);
-        background-color: #a3b18a;
+        color: $bgColorLightCream;
+        background-color: $bgColorLightGreen;
         font-size: x-large;
-        box-shadow: 0px 1px 16px 2px rgba(0, 0, 0, 1);
-        -webkit-box-shadow: 0px 1px 16px 2px rgba(0, 0, 0, 1);
-        -moz-box-shadow: 0px 1px 16px 2px rgba(0, 0, 0, 1);
+        box-shadow: $blackShadow;
+        -webkit-box-shadow: $blackShadow;
+        -moz-box-shadow: $blackShadow;
 
         img {
           transition: 0.5s;
@@ -264,7 +257,7 @@
   }
 
   .achievementCard {
-    background-color: #a3b18a;
+    background-color: $bgColorLightGreen;
     border-radius: 8px;
     grid-area: achievementCard;
     padding: 20px;
@@ -288,7 +281,7 @@
 
       .progressReadingBar {
         grid-area: bar;
-        background-color: #dfdfdf;
+        background-color: $bgColorLightGray;
       }
       .progress-bar {
         background-color: #c1aba6;
@@ -296,40 +289,37 @@
         animation: progress-bar 0.8s ease-out both;
       }
 
-      
       @-webkit-keyframes progress-bar {
         0% {
           -webkit-transform: scaleX(0.4);
-                  transform: scaleX(0.4);
+          transform: scaleX(0.4);
           -webkit-transform-origin: 0% 0%;
-                  transform-origin: 0% 0%;
+          transform-origin: 0% 0%;
         }
         100% {
           -webkit-transform: scaleX(1);
-                  transform: scaleX(1);
+          transform: scaleX(1);
           -webkit-transform-origin: 0% 0%;
-                  transform-origin: 0% 0%;
+          transform-origin: 0% 0%;
         }
       }
       @keyframes scale-up-hor-left {
         0% {
           -webkit-transform: scaleX(0.4);
-                  transform: scaleX(0.4);
+          transform: scaleX(0.4);
           -webkit-transform-origin: 0% 0%;
-                  transform-origin: 0% 0%;
+          transform-origin: 0% 0%;
         }
         100% {
           -webkit-transform: scaleX(1);
-                  transform: scaleX(1);
+          transform: scaleX(1);
           -webkit-transform-origin: 0% 0%;
-                  transform-origin: 0% 0%;
+          transform-origin: 0% 0%;
         }
       }
     }
   }
 }
-
-
 
 @media (max-width: 1200px) {
   .userContentPpal {
@@ -339,7 +329,7 @@
       "achievementCard progressCard"
       "myBookshelfcard myBookshelfcard";
     grid-template-columns: 40% 60%;
-    grid-template-rows: 34% 12% 53%;
+    grid-template-rows: auto auto 53%;
     // align-items: start;
 
     .progressCard {
@@ -386,9 +376,7 @@
           "toRead "
           "whislist";
         grid-template-columns: 100%;
-        grid-template-rows:  50vh 50vh 50vh 50vh;
-
-        
+        grid-template-rows: 50vh 50vh 50vh 50vh;
       }
     }
   }

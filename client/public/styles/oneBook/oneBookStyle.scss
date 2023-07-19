@@ -1,0 +1,55 @@
+@import "../variables/variables";
+
+.sectionBgOneBooks {
+  min-height: calc(100vh - 50px);
+  width: 100%;
+  background-image: url("/images/appImages/fondo2.jpg");
+  position: fixed;
+  bottom: 0;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+.contentSection {
+  width: 100%;
+  padding: calc(4vh + 50px) 4vw 4vh 4vw;
+  display: grid;
+  place-items: center;
+
+  .oneBookCard {
+    width: 80vw;
+    min-height: 80%;
+    padding: 24px;
+    border: 1px solid $borderColor;
+    border-radius: 16px;
+    display: grid;
+    grid-template:
+      "coverImg contentInfo"
+      "moreContent moreContent";
+    grid-template-columns: 30% 70%;
+    grid-template-rows: auto auto;
+    place-items: start;
+
+    .coverImg {
+      grid-area: coverImg;
+      max-height: 90vh;
+
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+    .contentInfo {
+      padding-left: 24px;
+      grid-area: contentInfo;
+    }
+    .moreContent {
+      grid-area: moreContent;
+      padding-top: 24px;
+      width: 100%;
+      overflow: hidden;
+    }
+  }
+}
