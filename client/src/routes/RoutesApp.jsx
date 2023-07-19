@@ -7,6 +7,7 @@ import { Register } from '../pages/auth/Register/Register';
 import { User } from '../pages/users/User/User';
 import { UserEdition } from '../pages/users/UserEdition/UserEdition';
 import { AllBooks } from '../pages/dashboard/AllBooks/AllBooks';
+import { OneBook } from '../pages/dashboard/AllBooks/OneBook/OneBook';
 import { Bookshelf } from '../pages/books/Bookshelf/Bookshelf';
 import { ReadBooks } from '../components/Bookshelves/ReadBooks';
 import { BooksToRead } from '../components/Bookshelves/BooksToRead';
@@ -36,6 +37,8 @@ export const RoutesApp = () => {
             <Route path="/user" element={<User/>}/>
             <Route path="/userEdition" element={<UserEdition/>}/>
             <Route path="/allBooks" element={<AllBooks/>}/>
+            <Route path="/allBooks/oneBook/:type/:key" element={<OneBook/>}/>
+
             <Route path="/bookshelf" element={<Bookshelf/>}/>
             <Route path="/mybookshelf" element={<MyBookshelf/>}>
 
