@@ -1,20 +1,78 @@
-.contentPpal{
-    min-height: calc(100vh - 50px);
-    
-    padding: calc(3vh + 50px) 2vw 3vh 2vw;
-    display: grid;
-    place-items: center;
-    color: white;
+@import "../variables/variables";
 
+.contentPpal {
+  min-height: calc(100vh - 50px);
+  padding: calc(3vh + 50px) 2vw 3vh 2vw;
+  display: grid;
+  place-items: center;
+  color: black;
 
-    .cardFormRegister{
-        
-        width: 40vw;
-        padding: 7vh 4vw;
-        background-color: rgba(255, 255, 255, 0.227);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
+  .cardFormRegister {
+    width: 40vw;
+    padding: 24px;
+    background-color: $bgColorLightCream;
+    border-radius: 16px;
 
+    .submitButton,
+    .cancelButton {
+      display: inline-block;
+      width: 150px;
+      border-radius: 10px;
+      border: 1px solid black;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s ease-in;
+      z-index: 1;
     }
     
+
+    .submitButton::before,
+    .submitButton::after,
+    .cancelButton::before,
+    .cancelButton::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 0;
+      height: 100%;
+      transform: skew(15deg);
+      transition: all 0.5s;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .submitButton::before {
+      left: -6px;
+      background: #889473;
+    }
+
+    .submitButton::after {
+      right: -6px;
+      background: #b4c598;
+    }
+
+    .submitButton:hover::before,
+    .submitButton:hover::after,
+    .cancelButton:hover::before,
+    .cancelButton:hover::after {
+      width: 30%;
+    }
+
+    .submitButton:hover {
+      background-color: $bgColorLightGreen;
+    }
+
+    .cancelButton::before {
+      left: -6px;
+      background: #e34c4c;
+    }
+
+    .cancelButton::after {
+      right: -6px;
+      background: #fc5858;
+    }
+    .cancelButton:hover {
+      background-color: rgb(254, 72, 72);
+    }
+  }
 }

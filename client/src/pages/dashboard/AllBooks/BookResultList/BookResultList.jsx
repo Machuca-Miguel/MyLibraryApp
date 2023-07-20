@@ -1,14 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../../../../context/AppProvider";
 
-export const BookResultList = ({ searchResult, showResult, search }) => {
+export const BookResultList = ({ showResult, setShowResult, search }) => {
+  const [animation, setAnimation] = useState(false);
   const navigate = useNavigate();
+  const { searchResult } = useContext(AppContext);
 
   useEffect(() => {
+    if (searchResult?.length > 0) {
+      setShowResult(true);
+      setAnimation(true);
+    }
+
+    console.log(searchResult);
     // Function to handle checkbox visibility
     const checkBoxes = () => {
-      const triggerBottom = (window.innerHeight / 5) * 4;
-      boxes.forEach((box, idx) => {
+      const triggerBottom = (window.innerHeight / 8) * 7;
+      boxes.forEach((box) => {
         const boxTop = box.getBoundingClientRect().top;
 
         if (boxTop < triggerBottom) {
@@ -28,7 +37,7 @@ export const BookResultList = ({ searchResult, showResult, search }) => {
       // Remove the scroll event listener when component unmounts
       window.removeEventListener("scroll", checkBoxes);
     };
-  }, [searchResult]);
+  }, [searchResult, animation]);
 
   return (
     <>
@@ -36,57 +45,65 @@ export const BookResultList = ({ searchResult, showResult, search }) => {
         <>
           <div className="bookListCard">
             {searchResult ? (
-              searchResult.length > 0 ?
-              <>
-                <h3 className="mb-0 align-self-start">
-                  Results of "{search.bookSearch}"
-                </h3>
-                <hr className="mt-0" />
-                <table className="resultTable">
-                  <thead>
-                    <tr>
-                      <th>Cover</th>
-                      <th>Title</th>
-                      <th>Author</th>
-                    </tr>
-                  </thead>
-                  <tbody className="overflow-hidden">
-                    {searchResult?.map((element) => {
-                      return (
-                        <tr
-                          className="box"
-                          key={element.key}
-                          onClick={() =>
-                            navigate(`/allBooks/oneBook${element.key}`)
-                          }
-                        >
-                          <td>
-                            <div className="tableImgCont">
-                              {element.cover_i ? (
-                                <img
-                                  src={`https://covers.openlibrary.org/b/id/${element.cover_i}-S.jpg`}
-                                  alt="Book cover"
-                                />
-                              ) : (
-                                <img
-                                  className="soonGif"
-                                  src="/images/appImages/soon.gif"
-                                />
-                              )}
-                            </div>
-                          </td>
-                          <td>{element?.title}</td>
-                          <td>
-                            {" "}
-                            {element.author_name && element.author_name[0]}
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </>
-              : <h3 >No results..</h3>
+              searchResult.length > 0 ? (
+                <>
+                  <h3 className="mb-0 align-self-start">
+                    {search
+                      ? `Results of ${search?.bookSearch}`
+                      : "Last Results"}
+                  </h3>
+                  <hr className="mt-0" />
+
+                  <table className="resultTable">
+                    <thead>
+                      <tr>
+                        <th>Cover</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                      </tr>
+                    </thead>
+                    <tbody className="overflow-hidden">
+                      {searchResult?.map((element) => {
+                        return (
+                          <tr
+                            className="box"
+                            key={element.key}
+                            onClick={() =>
+                              navigate(`/allBooks/oneBook${element.key}`)
+                            }
+                          >
+                            <td>
+                              <div className="tableImgCont">
+                                {element.cover_i ? (
+                                  <img
+                                    src={`https://covers.openlibrary.org/b/id/${element.cover_i}-S.jpg`}
+                                    alt="Book cover"
+                                  />
+                                ) : (
+                                  <img
+                                    className="soonGif"
+                                    src="/images/appImages/soon.gif"
+                                  />
+                                )}
+                              </div>
+                            </td>
+                            <td>{element?.title}</td>
+                            <td>
+                              {" "}
+                              {element.author_name && element.author_name[0]}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </>
+              ) : (
+                <div className="errorCont">
+                  <img className="errorGif" src="/images/appImages/error.gif" />
+                  <h3>No results</h3>
+                </div>
+              )
             ) : (
               <div className="loadingImg">
                 <img src="/images/appImages/searchLoadingGif.gif" />

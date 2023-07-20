@@ -21,10 +21,11 @@
     "userCard bookListCard bookListCard"
     "none bookListCard bookListCard";
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: auto 10fr auto;
+  grid-template-rows: auto 10fr 10fr;
   grid-gap: 16px;
 
   .searchCard {
+    width: 100%;
     border: 1px solid $borderColor;
     border-radius: 8px;
     background-color: $bgColorLightGreen;
@@ -43,11 +44,7 @@
     }
 
     input:focus {
-      box-shadow: -2px 0 6px 1px $borderColor;
-
-      & + button {
-        box-shadow: 2px 0 6px 1px $borderColor;
-      }
+    box-shadow: 0px 0px 6px black;
     }
   }
   .searchCard:hover,
@@ -91,6 +88,7 @@
   }
 
   .bookListCard {
+    height: fit-content;
     grid-area: bookListCard;
     border: 1px solid $borderColor;
     border-radius: 8px;
@@ -108,12 +106,26 @@
     position: relative;
 
     .loadingImg {
-      width: 150px;
+      width: 250px;
+      aspect-ratio: 1/1;
       position: relative;
-      top: calc(50% - 50px);
+      top: calc(50% - 75px);
 
       img {
         width: 100%;
+        aspect-ratio: 1/1;
+        mix-blend-mode: multiply;
+        filter: hue-rotate(280deg);
+      }
+
+    }
+    .errorCont{
+      
+      position: relative;
+      top: calc(50% - 100px);
+
+      .errorGif{
+        width: 100px;
         aspect-ratio: 1/1;
         mix-blend-mode: multiply;
         filter: hue-rotate(280deg);

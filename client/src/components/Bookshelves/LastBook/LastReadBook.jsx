@@ -18,7 +18,7 @@ export const LastReadBook = () => {
 
   return (
     <div className="readBook">
-      <h5>Read</h5>
+      <h5>Read Books</h5>
       <div className='coverCont'>
 
         <img src={`/images/appImages/bookCovers/${lastBook?.cover_img}`} alt="" />

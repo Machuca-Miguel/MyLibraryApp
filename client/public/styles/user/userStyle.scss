@@ -11,6 +11,7 @@
   background-repeat: no-repeat;
   z-index: -1;
 }
+
 .userContentPpal {
   width: 100%;
   padding: calc(4vh + 50px) 4vw 4vh 4vw;
@@ -18,319 +19,446 @@
   display: grid;
   grid-template:
     "userCard progressCard progressCard progressCard"
-    "achievementCard myBookshelfcard  myBookshelfcard myBookshelfcard"
+    "userCard achievementCard achievementCard achievementCard"
+    "searchCardUser myBookshelfcard  myBookshelfcard myBookshelfcard"
     "none myBookshelfcard myBookshelfcard myBookshelfcard";
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: auto 15vh 40vh;
-  grid-gap: 1.5rem;
+  grid-template-rows: auto auto 1fr 2fr;
+  grid-gap: 16px;
+}
 
-  .userCard:hover,
-  .progressCard:hover,
-  .myBookshelfcard:hover,
-  .achievementCard:hover {
-    box-shadow: $blackShadow;
-    -webkit-box-shadow: $blackShadow;
-    -moz-box-shadow: $blackShadow;
+.userCard,
+.progressCard,
+.myBookshelfcard,
+.achievementCard,
+.searchCardUser {
+  width: 100%;
+  background-color: transparent;
+  backdrop-filter: blur(4px);
+  border-radius: 8px;
+  border: 1px solid $borderColor;
+  padding: 2vh 2vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.userCard:hover,
+.progressCard:hover,
+.myBookshelfcard:hover,
+.achievementCard:hover,
+.searchCardUser:hover {
+  box-shadow: $blackShadow;
+  -webkit-box-shadow: $blackShadow;
+  -moz-box-shadow: $blackShadow;
+}
+
+/* .userCard */
+.userCard {
+  grid-area: userCard;
+  background-color: transparent;
+  backdrop-filter: blur(4px);
+
+  .userSettingIcon{
+    display: none;
   }
 
-  .userCard {
-    background-color: transparent;
-    backdrop-filter: blur(4px);
-    border: 1px solid $borderColor;
-    grid-area: userCard;
-    padding: 2vh 2vw;
-
+  .headlineCont {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    border-radius: 8px;
+    align-items: center;
+    gap: 16px;
+  }
 
-    .headlineCont {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
+  .cardTitle {
+    text-transform: capitalize;
+  }
 
-    .cardTitle {
-      text-transform: capitalize;
-    }
+  .profile_img {
+    width: 70px;
+    aspect-ratio: 1 / 1;
+    border-radius: 100%;
+    border: 2px solid;
+    outline: 1px solid;
+    outline-offset: 2px;
+  }
 
-    .profile_img {
-      width: 70px;
-      aspect-ratio: 1 / 1;
-      border-radius: 100%;
-      border: 2px solid;
-      outline: 1px solid;
-      outline-offset: 2px;
-    }
+  .cardInfo {
+    align-self: start;
+    margin-bottom: 10px;
 
-    .cardInfo {
-      align-self: start;
-      margin-bottom: 10px;
-
-      p {
-        margin: 0;
-      }
-    }
-
-    .cardNavigation {
-      align-self: end;
+    p {
+      margin: 0;
     }
   }
 
-  .progressCard {
-    background-color: transparent;
-    backdrop-filter: blur(4px);
-    grid-area: progressCard;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    padding: 2vh 2vw;
-    border-radius: 8px;
-    border: 1px solid $borderColor;
-
-    h3 {
-      font-size: clamp(1.5rem, 3vh, 2rem);
-    }
-
-    .booksList {
-      padding: 0px 1vw;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-
-      .listedBook {
-        width: 100%;
-        display: grid;
-        grid-template: "title progressReadingContent pages";
-        grid-template-columns: 2fr 3fr 1fr;
-        align-items: center;
-        grid-gap: 10px;
-
-        p,
-        h5 {
-          margin: 0;
-        }
-
-        .title {
-          grid-area: title;
-        }
-
-        .progressReadingContent {
-          grid-area: progressReadingContent;
-          .progressReadingBar {
-            background-color: $bgColorLightGray;
-            border: 0.5px solid $borderColor;
-          }
-          .progress-bar {
-            background-color: #c1aba6;
-            -webkit-animation: progress-bar 0.8s ease-out both;
-            animation: progress-bar 0.8s ease-out both;
-          }
-
-          @keyframes progress-bar {
-            0% {
-              -webkit-transform: scaleX(0.4);
-              transform: scaleX(0.4);
-              -webkit-transform-origin: 0% 0%;
-              transform-origin: 0% 0%;
-            }
-            100% {
-              -webkit-transform: scaleX(1);
-              transform: scaleX(1);
-              -webkit-transform-origin: 0% 0%;
-              transform-origin: 0% 0%;
-            }
-          }
-        }
-
-        .pages {
-          grid-area: pages;
-        }
-      }
-    }
+  .cardNavigation {
+    align-self: end;
+  }
+  button {
+    display: inline-block;
+    width: 100px;
+    border-radius: 10px;
+    border: 1px solid black;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s ease-in;
+    z-index: 1;
+   
   }
 
-  .myBookshelfcard {
-    background-color: #c1aba6;
-    border-radius: 8px;
-    grid-area: myBookshelfcard;
-    padding: 2vh 2vw;
-    display: flex;
-    flex-direction: column;
-
-    .titleBookshelf {
-      height: 6vh;
-
-      h3,
-      hr {
-        margin: 0;
-        font-size: clamp(1.5rem, 4vh, 3rem);
-      }
-    }
-
-    .triptych {
-      height: calc(100% - 6vh);
-      display: grid;
-      grid-column-gap: 1%;
-      grid-template: "readBook readingBook toRead whislist";
-      grid-template-columns: 23% 23% 23% 23%;
-      grid-template-rows: 100%;
-      align-items: center;
-      justify-content: space-evenly;
-      text-align: center;
-
-      .readBook {
-        grid-area: readBook;
-      }
-
-      .readingBook {
-        grid-area: readingBook;
-      }
-
-      .toRead {
-        grid-area: toRead;
-      }
-
-      .whislist {
-        grid-area: whislist;
-      }
-
-      .readBook,
-      .readingBook,
-      .toRead,
-      .whislist {
-        height: 99%;
-        padding: 1vh 0vw;
-        background-color: $bgColorLightCream;
-        border-radius: 8px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        border: 1px solid $borderColor;
-
-        .coverCont {
-          width: 100%;
-          height: 100%;
-          overflow: hidden;
-
-          img {
-            width: 100%;
-            height: 100%;
-            aspect-ratio: 9/16;
-            object-fit: contain;
-            object-position: center;
-          }
-        }
-        .titleCont {
-          height: 8vh;
-          display: grid;
-          place-items: center;
-
-          h6 {
-            margin-bottom: 0;
-            font-size: 1rem;
-          }
-        }
-      }
-
-      .readBook:hover,
-      .readingBook:hover,
-      .toRead:hover,
-      .whislist:hover {
-        cursor: pointer;
-        color: $bgColorLightCream;
-        background-color: $bgColorLightGreen;
-        font-size: x-large;
-        box-shadow: $blackShadow;
-        -webkit-box-shadow: $blackShadow;
-        -moz-box-shadow: $blackShadow;
-
-        img {
-          transition: 0.5s;
-          transform: scale(1.05);
-        }
-      }
-    }
+  button::before,
+  button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 100%;
+    transform: skew(15deg);
+    transition: all 0.5s;
+    overflow: hidden;
+    z-index: -1;
   }
 
-  .achievementCard {
-    background-color: $bgColorLightGreen;
-    border-radius: 8px;
-    grid-area: achievementCard;
-    padding: 20px;
+  button::before {
+    left: -10px;
+    background: #889473;
+  }
+
+  button::after {
+    right: -10px;
+    background: #b4c598;
+  }
+
+  button:hover::before,
+  button:hover::after {
+    width: 60%;
+  }
+
+
+  
+}
+
+/* .progressCard */
+.progressCard {
+  grid-area: progressCard;
+
+  h3 {
+    font-size: clamp(1.5rem, 3vh, 2rem);
+  }
+
+  .booksList {
+    padding: 0px 1vw;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 
-    h3 {
-      font-size: clamp(1.5rem, 3vh, 2rem);
-    }
-    .cardContent {
+    .listedBook {
+      width: 100%;
       display: grid;
-      grid-template: "year bar percentage";
-      grid-template-columns: 12% 65% 12%;
+      grid-template: "title progressReadingContent pages";
+      grid-template-columns: 2fr 3fr 1fr;
       align-items: center;
-      grid-column-gap: 5%;
+      grid-gap: 10px;
 
-      h6 {
+      p,
+      h5 {
         margin: 0;
       }
 
-      .progressReadingBar {
-        grid-area: bar;
-        background-color: $bgColorLightGray;
-      }
-      .progress-bar {
-        background-color: #c1aba6;
-        -webkit-animation: progress-bar 0.8s ease-out both;
-        animation: progress-bar 0.8s ease-out both;
+      .title {
+        grid-area: title;
       }
 
-      @-webkit-keyframes progress-bar {
-        0% {
-          -webkit-transform: scaleX(0.4);
-          transform: scaleX(0.4);
-          -webkit-transform-origin: 0% 0%;
-          transform-origin: 0% 0%;
+      .progressReadingContent {
+        grid-area: progressReadingContent;
+        .progressReadingBar {
+          background-color: $bgColorLightGray;
+          border: 0.5px solid $borderColor;
         }
-        100% {
-          -webkit-transform: scaleX(1);
-          transform: scaleX(1);
-          -webkit-transform-origin: 0% 0%;
-          transform-origin: 0% 0%;
+        .progress-bar {
+          background-color: #c1aba6;
+          -webkit-animation: progress-bar 0.8s ease-out both;
+          animation: progress-bar 0.8s ease-out both;
+        }
+
+        @keyframes progress-bar {
+          0% {
+            -webkit-transform: scaleX(0.4);
+            transform: scaleX(0.4);
+            -webkit-transform-origin: 0% 0%;
+            transform-origin: 0% 0%;
+          }
+          100% {
+            -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+            -webkit-transform-origin: 0% 0%;
+            transform-origin: 0% 0%;
+          }
         }
       }
-      @keyframes scale-up-hor-left {
-        0% {
-          -webkit-transform: scaleX(0.4);
-          transform: scaleX(0.4);
-          -webkit-transform-origin: 0% 0%;
-          transform-origin: 0% 0%;
-        }
-        100% {
-          -webkit-transform: scaleX(1);
-          transform: scaleX(1);
-          -webkit-transform-origin: 0% 0%;
-          transform-origin: 0% 0%;
-        }
+
+      .pages {
+        grid-area: pages;
       }
     }
   }
 }
 
+/* .myBookshelfcard */
+.myBookshelfcard {
+  background-color: #c1aba6;
+  border: 1px solid $borderColor;
+  border-radius: 8px;
+  grid-area: myBookshelfcard;
+  padding: 2vh 2vw;
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
+
+  .titleBookshelf {
+    height: 15%;
+
+    h3,
+    hr {
+      margin: 0;
+      font-size: clamp(1.5rem, 4vh, 3rem);
+    }
+    hr {
+      margin-bottom: 8px;
+    }
+  }
+
+  .triptych {
+    height: 85%;
+    display: grid;
+    grid-column-gap: 1%;
+    grid-template: "readBook readingBook toRead whislist";
+    grid-template-columns: 23% 23% 23% 23%;
+    grid-template-rows: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+
+    .readBook {
+      grid-area: readBook;
+    }
+
+    .readingBook {
+      grid-area: readingBook;
+    }
+
+    .toRead {
+      grid-area: toRead;
+    }
+
+    .whislist {
+      grid-area: whislist;
+    }
+
+    .readBook,
+    .readingBook,
+    .toRead,
+    .whislist {
+      height: 100%;
+      padding: 8px;
+      background-color: $bgColorLightCream;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid $borderColor;
+
+
+      .coverCont {
+        width: 100%;
+        height: 85%;
+
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-position: center;
+          object-fit: contain;
+        }
+      }
+      .titleCont {
+        height: 15%;
+        display: grid;
+        place-items: center;
+
+        h6 {
+          margin-bottom: 0;
+          font-size: 1rem;
+        }
+      }
+    }
+
+    .readBook:hover,
+    .readingBook:hover,
+    .toRead:hover,
+    .whislist:hover {
+      cursor: pointer;
+      color: $bgColorLightCream;
+      background-color: $bgColorLightGreen;
+      font-size: x-large;
+      box-shadow: $blackShadow;
+      -webkit-box-shadow: $blackShadow;
+      -moz-box-shadow: $blackShadow;
+
+      img {
+        transition: 0.5s;
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+/* .searchCardUser */
+.searchCardUser {
+  grid-area: searchCardUser;
+  background-color: $bgColorLightGreen;
+
+  input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  input:focus {
+    border-color: black;
+    box-shadow: 0px 0px 3px black;
+  }
+
+  button {
+    display: inline-block;
+    width: 100px;
+    border-radius: 10px;
+    border: 1px solid black;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s ease-in;
+    z-index: 1;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  button::before,
+  button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 100%;
+    transform: skew(15deg);
+    transition: all 0.5s;
+    overflow: hidden;
+    z-index: -1;
+  }
+
+  button::before {
+    left: -6px;
+    background: #889473;
+  }
+
+  button::after {
+    right: -6px;
+    background: #b4c598;
+  }
+
+  button:hover::before,
+  button:hover::after {
+    width: 60%;
+  }
+
+  button:hover span {
+    color: #a3b18a;
+    transition: 0.3s;
+  }
+
+  button span {
+    color: #03045e;
+    font-size: 18px;
+    transition: all 0.3s ease-in;
+  }
+}
+
+/* .achievementCard */
+.achievementCard {
+  grid-area: achievementCard;
+  background-color: $bgColorLightGreen;
+
+  h3 {
+    font-size: clamp(1.5rem, 3vh, 2rem);
+  }
+
+  .cardContent {
+    display: grid;
+    grid-template: "year bar percentage";
+    grid-template-columns: 50PX auto 50PX;
+    align-items: center;
+    grid-column-gap: 5%;
+
+    h6 {
+      margin: 0;
+    }
+
+    .progressReadingBar {
+      grid-area: bar;
+      background-color: $bgColorLightGray;
+    }
+    .progress-bar {
+      background-color: #c1aba6;
+      -webkit-animation: progress-bar 0.8s ease-out both;
+      animation: progress-bar 0.8s ease-out both;
+    }
+
+    @keyframes progress-bar {
+      0% {
+        -webkit-transform: scaleX(0.4);
+        transform: scaleX(0.4);
+        -webkit-transform-origin: 0% 0%;
+        transform-origin: 0% 0%;
+      }
+      100% {
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+        -webkit-transform-origin: 0% 0%;
+        transform-origin: 0% 0%;
+      }
+    }
+    @keyframes scale-up-hor-left {
+      0% {
+        -webkit-transform: scaleX(0.4);
+        transform: scaleX(0.4);
+        -webkit-transform-origin: 0% 0%;
+        transform-origin: 0% 0%;
+      }
+      100% {
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+        -webkit-transform-origin: 0% 0%;
+        transform-origin: 0% 0%;
+      }
+    }
+  }
+}
+
+/* Media Queries */
 @media (max-width: 1200px) {
   .userContentPpal {
-    height: 100vh;
     grid-template:
-      "userCard progressCard"
-      "achievementCard progressCard"
+      "userCard searchCardUser "
+      "userCard progressCard "
+      "achievementCard progressCard  "
+      "myBookshelfcard myBookshelfcard"
       "myBookshelfcard myBookshelfcard";
+
     grid-template-columns: 40% 60%;
-    grid-template-rows: auto auto 53%;
-    // align-items: start;
+    grid-template-rows: auto auto auto auto auto;
+
+    .myBookshelfcard {
+      height: fit-content;
+    }
 
     .progressCard {
       .booksList {
@@ -346,16 +474,48 @@
 }
 
 @media (max-width: 992px) {
+  .sectionBgPpal {
+    background-position: left;
+  }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .userContentPpal {
     grid-template:
+      "searchCardUser"
       "userCard"
-      "progressCard"
       "achievementCard"
+      "progressCard"
       "myBookshelfcard";
-    grid-template-rows: auto auto auto auto;
+    grid-template-rows: auto auto auto auto auto;
+
+    .userCard{
+      position: relative;
+      p{display: none;}
+      button{
+        position: absolute;
+        top: 10px;
+        right:10px ;
+        padding: 15px;
+        border: none;
+
+        width: fit-content;
+        
+        .textButton{
+          display: none;
+        }
+
+        .userSettingIcon{
+          display: flex;
+          
+          scale: 1.5;
+        }
+      }
+      button:hover{
+        background-color: $bgColorLightGreen;
+      }
+
+    }
 
     .progressCard {
       .booksList {
@@ -371,13 +531,47 @@
     .myBookshelfcard {
       .triptych {
         grid-template:
-          "readBook "
-          "readingBook"
-          "toRead "
-          "whislist";
-        grid-template-columns: 100%;
-        grid-template-rows: 50vh 50vh 50vh 50vh;
+          "readBook readingBook"
+          
+          "toRead whislist";
+        grid-template-columns: 40vw 40vw;
+        grid-template-rows: 120px  120px;
+        place-items: center;
+        text-align: center;
+        grid-row-gap: 8px;
+
+        .readBook,
+        .readingBook,
+        .toRead,
+        .whislist {
+          width: 100%;
+          display: grid;
+          grid-template: "coverImage catergory";
+          grid-template-columns: 40% 60%;
+          align-items: center;
+          
+          h5{
+            grid-area: catergory;
+          }
+
+          .titleCont{
+            display: none;
+          
+          }
+          
+          .coverCont{
+            grid-area: coverImage;
+            width: 100%;
+            height: 100%;            
+            img{
+              width: 100%;
+              height: 100%;
+            }
+          };
+        }
       }
     }
   }
 }
+
+

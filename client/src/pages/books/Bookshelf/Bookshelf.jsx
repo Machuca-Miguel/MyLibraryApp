@@ -13,10 +13,12 @@ export const Bookshelf = () => {
         <hr className='' />
       </div>
       <div className='triptych'>
-        <LastReadBook />
-        <LastReadingBook/>
-        <LastToReadBook/>
-        <LastWishlisted/>
+       
+          <LastReadBook />
+          <LastReadingBook/>
+          <LastToReadBook/>
+          <LastWishlisted/>
+       
 
       </div>
 

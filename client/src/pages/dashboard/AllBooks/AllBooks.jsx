@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
 import "../../../../public/styles/allBooks/allBooksStyle.scss"
-import { SeachCard } from './SearchCard/SeachCard'
+import { SearchCard } from './SearchCard/SearchCard'
 import { BookResultList } from './BookResultList/BookResultList'
 
 export const AllBooks = () => {
-  const [searchResult, setSearchResult] = useState()
   const [showResult, setShowResult] = useState(false)
   const [search, setSearch] = useState()
 
@@ -16,8 +15,8 @@ export const AllBooks = () => {
     <>
     <section className='sectionBgPpalAllBooks'></section>
     <div className='sectionContentPpalAllBooks'>
-        <SeachCard setSearch={setSearch} setSearchResult={setSearchResult} setShowResult={setShowResult}/>
-        <BookResultList searchResult={searchResult} showResult={showResult} search={search}/>
+        <SearchCard setSearch={setSearch} setShowResult={setShowResult}/>
+        <BookResultList  showResult={showResult} setShowResult={setShowResult} search={search}/>
     </div>
     </>
   )

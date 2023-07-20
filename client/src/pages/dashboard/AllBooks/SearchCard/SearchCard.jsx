@@ -1,9 +1,11 @@
 import axios from "axios";
-import React from "react";
+import React, { useContext } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { AppContext } from "../../../../context/AppProvider";
 
-export const SeachCard = ({ setSearchResult, setShowResult, setSearch }) => {
+export const SearchCard = ({  setShowResult, setSearch }) => {
+  const {setSearchResult} = useContext(AppContext)
   const {
     register,
     handleSubmit,
@@ -11,11 +13,12 @@ export const SeachCard = ({ setSearchResult, setShowResult, setSearch }) => {
     formState: { errors },
   } = useForm();
 
-  console.log();
 
   const onSubmit = (search) => {
     setSearch(search);
     console.log(search);
+    setSearchResult("");
+
 
     let formatedSearch = search.bookSearch.replace(/ /g, "+");
 

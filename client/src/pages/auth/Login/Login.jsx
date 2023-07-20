@@ -75,16 +75,16 @@ export const Login = () => {
             </Form.Group>
             <Form.Text className="text-danger">{errorMessage}</Form.Text>
 
-            <Form.Text className=" fw-lighter text-light">
+            <Form.Text className=" fw-lighter text-dark">
               Not registered yet? Register <Link to={"/register"}>here</Link>
             </Form.Text>
             <Form.Group className="mt-3 d-flex justify-content-between">
-              <Button variant="outline-danger" onClick={() => navigate(-1)}>
+              <Button className="cancelButton" variant="outline-danger" onClick={() => navigate(-1)}>
                 Cancel
               </Button>
 
-              <Button variant="outline-success" type="submit">
-                Submit
+              <Button className="submitButton" variant="outline-success" type="submit">
+                <span>Submit</span>
               </Button>
             </Form.Group>
 
