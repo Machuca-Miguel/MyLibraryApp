@@ -5,6 +5,7 @@ const logger = require("morgan");
 const cors = require('cors');
 
 const usersRouter = require("./routes/users")
+const booksRouter = require("./routes/books")
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/users", usersRouter);
+app.use("/books", booksRouter);
 
 
 module.exports = app;

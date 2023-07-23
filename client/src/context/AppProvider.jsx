@@ -23,8 +23,8 @@ export const AppProvider = ({ children }) => {
         .then((res) => {
           setUser(res.data.resultUser[0]);
           setBookshelf(res.data.resultBook);
+          console.log(res.data.resultBook);
           setIsLogged(true);
-          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -47,6 +47,8 @@ export const AppProvider = ({ children }) => {
         setBookshelf,
         searchResult,
         setSearchResult,
+     
+        
       }}
     >
       {children}

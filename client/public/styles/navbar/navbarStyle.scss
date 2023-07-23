@@ -1,8 +1,21 @@
+@import "../variables/variables";
+
+
 .navbarApp{
-    height: 50px;
+    height: 60px;
     width: 100%;
     position: fixed !important;
     z-index: 2;
+    span{
+        color:$borderColor ;
+        font-weight: bolder;
+    }
+
+    .logo{
+        height: 55px;
+        filter: grayscale(100%);
+        
+    }
   
   
     

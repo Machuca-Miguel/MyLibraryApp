@@ -4,8 +4,11 @@ import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { AppContext } from "../../../../context/AppProvider";
 
+
 export const SearchCard = ({  setShowResult, setSearch }) => {
   const {setSearchResult} = useContext(AppContext)
+
+  
   const {
     register,
     handleSubmit,
@@ -16,16 +19,17 @@ export const SearchCard = ({  setShowResult, setSearch }) => {
 
   const onSubmit = (search) => {
     setSearch(search);
-    console.log(search);
     setSearchResult("");
 
 
     let formatedSearch = search.bookSearch.replace(/ /g, "+");
 
     axios
-      .get(`https://openlibrary.org/search.json?lang=spa&q=${formatedSearch}`)
+      .get(`https://openlibrary.org/search.json?&q=${formatedSearch}`)
       .then((res) => {
         setSearchResult(res.data.docs);
+       
+      
       })
       .catch((error) => console.log(error));
     reset({ bookSearch: "" });

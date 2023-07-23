@@ -33,7 +33,10 @@ class userControllers {
   //http://localhost:4000/users/login
 
   login = (req, res) => {
-    console.log("reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeq",req.body);
+    console.log(
+      "reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeq",
+      req.body
+    );
     let { email, password } = req.body;
     let sql = `SELECT * FROM user WHERE email = '${email}'`;
 
@@ -95,8 +98,7 @@ class userControllers {
     let id = req.params.user_id;
 
     let sqlUser = `SELECT * FROM user WHERE user_id = ${id} and is_deleted = 0`;
-    let sqlBook = `SELECT book.*, user_book.*, author.*
-    FROM user
+    let sqlBook = `SELECT book.title ,book.genre ,book.pages_number ,book.cover_img AS book_cover_img , user_book.is_read_date, user_book.current_page,  user_book.to_read_date, user_book.added_reading_date, user_book.wishlist_date, user_book.cover_img AS user_cover_img,  author.author_name FROM user
     JOIN user_book ON user.user_id = user_book.user_id
     JOIN book ON user_book.book_id = book.book_id
     JOIN author ON book.author_id = author.author_id
@@ -122,31 +124,28 @@ class userControllers {
   };
 
   //------------------------------------------------------
-//4.-Edit user data
-//http://localhost:4000/users/oneUser/userEdition/:user_id ;
+  //4.-Edit user data
+  //http://localhost:4000/users/oneUser/userEdition/:user_id ;
   editOneUser = (req, res) => {
     const user_id = req.params.user_id;
     const { user_name, name, last_name, age } = req.body;
 
-    let img = ""
+    let img = "";
 
     let sql = `UPDATE user SET user_name = "${user_name}", name = "${name}", last_name = "${last_name}", age = ${age} WHERE user_id = ${user_id}`;
 
-    if(req.file !=undefined){
-      img = req.file.filename
-     
+    if (req.file != undefined) {
+      img = req.file.filename;
 
-      sql =  `UPDATE user SET user_name = "${user_name}", name = "${name}", last_name = "${last_name}", age = ${age}, profile_img = "${img}" WHERE user_id = ${user_id}`
+      sql = `UPDATE user SET user_name = "${user_name}", name = "${name}", last_name = "${last_name}", age = ${age}, profile_img = "${img}" WHERE user_id = ${user_id}`;
     }
 
     connection.query(sql, (err, result) => {
       err
-      ? res.status(400).json({ err })
-      : res.status(200).json({ result, img });
+        ? res.status(400).json({ err })
+        : res.status(200).json({ result, img });
     });
-
-
-  }
+  };
 }
 
 module.exports = new userControllers();

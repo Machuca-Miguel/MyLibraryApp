@@ -27,9 +27,11 @@ export const Register = () => {
       <section className="backgroundPpal"></section>
       <section className="contentPpal">
         <div className="cardFormRegister">
-          <h3>Registration</h3>
+          <div className="header">
+            <h3>Registration</h3>
+          </div>
           <Form onSubmit={handleSubmit(onSubmit)}>
-            <Form.Group className="mb-2">
+            <Form.Group className="mb-2 first_name">
               <Form.Label>First name</Form.Label>
               <Form.Control
                 {...register("name", {
@@ -44,16 +46,22 @@ export const Register = () => {
               </Form.Text>
             </Form.Group>
 
-            <Form.Group className="mb-2">
+            <Form.Group className="mb-2 last_name">
               <Form.Label>Last name</Form.Label>
               <Form.Control
-                {...register("last_name")}
+                {...register("last_name", {
+                  required: "Must be filled",
+                  minLength: { value: 4, message: "Min length is 4" },
+                })}
                 type="text"
                 placeholder="Last name"
               />
+              <Form.Text className="text-danger">
+                {errors.last_name?.message}
+              </Form.Text>
             </Form.Group>
 
-            <Form.Group className="mb-2">
+            <Form.Group className="mb-2 age">
               <Form.Label>Age</Form.Label>
               <Form.Control
                 {...register("age", {
@@ -67,7 +75,7 @@ export const Register = () => {
               </Form.Text>
             </Form.Group>
 
-            <Form.Group className="mb-2">
+            <Form.Group className="mb-2 user_name">
               <Form.Label>User name</Form.Label>
               <Form.Control
                 {...register("user_name", {
@@ -82,7 +90,7 @@ export const Register = () => {
               </Form.Text>
             </Form.Group>
 
-            <Form.Group className="mb-2">
+            <Form.Group className="mb-2 email">
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 {...register("email", { required: "Must be filled" })}
@@ -93,7 +101,7 @@ export const Register = () => {
               <Form.Text className="text-danger"></Form.Text>
             </Form.Group>
 
-            <Form.Group className="mb-2">
+            <Form.Group className="mb-2 password">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 {...register("password", {
@@ -112,17 +120,28 @@ export const Register = () => {
                 {errors.password?.message}
               </Form.Text>
             </Form.Group>
-            
-            <Form.Text className=" fw-lighter text-light">
-              Already registered? Login <Link to={"/login"}>here</Link>
+
+            <Form.Text className=" fw-lighter text-light linkText">
+              Already registered? Login{" "}
+              <Link className="link" to={"/login"}>
+                here
+              </Link>
             </Form.Text>
 
-            <Form.Group className="mt-3 d-flex justify-content-between">
-              <Button className="cancelButton" variant="outline-danger" onClick={() => navigate(-1)}>
+            <Form.Group className="mt-3 d-flex justify-content-evenly buttons">
+              <Button
+                className="cancelButton"
+                variant="outline-danger"
+                onClick={() => navigate(-1)}
+              >
                 Cancel
               </Button>
 
-              <Button className="submitButton" variant="outline-success" type="submit">
+              <Button
+                className="submitButton"
+                variant="outline-success"
+                type="submit"
+              >
                 Submit
               </Button>
             </Form.Group>

@@ -17,9 +17,9 @@ export const InProgress = () => {
       </div>
 
       <div className="booksList">
-        {filteredBooks?.map((element) => {
+        {filteredBooks?.map((element, index) => {
           return (
-            <div key={element.book_id} className="listedBook">
+            <div key={element.index} className="listedBook">
               <h5 className="title">{element.title}</h5>
 
               <ProgressReadingBar element={element}  className="progressReadingContent"/>
