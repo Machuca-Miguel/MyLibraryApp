@@ -5,6 +5,7 @@ import "../../../../public/styles/user/userStyle.scss"
 import { Bookshelf } from '../../books/Bookshelf/Bookshelf'
 import { InProgress } from '../../../components/InProgress/InProgress'
 import { AchievementCard } from '../../../components/AchievementCard/AchievementCard'
+import { SearchCardUser } from '../../../components/SearchCardUser/SearchCardUser'
 
 export const User = () => {
   return (
@@ -14,6 +15,7 @@ export const User = () => {
     <section className='userContentPpal'>
       <UserCard/>
       <InProgress/>
+      <SearchCardUser/>
       <Bookshelf/>
       <AchievementCard/>
 

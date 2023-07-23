@@ -37,7 +37,7 @@ export const RoutesApp = () => {
             <Route path="/user" element={<User/>}/>
             <Route path="/userEdition" element={<UserEdition/>}/>
             <Route path="/allBooks" element={<AllBooks/>}/>
-            <Route path="/allBooks/oneBook/:type/:key" element={<OneBook/>}/>
+            <Route path="/allBooks/oneBook/:type/:olid" element={<OneBook/>}/>
 
             <Route path="/bookshelf" element={<Bookshelf/>}/>
             <Route path="/mybookshelf" element={<MyBookshelf/>}>

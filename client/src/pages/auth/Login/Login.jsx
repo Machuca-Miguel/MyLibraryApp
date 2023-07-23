@@ -46,10 +46,12 @@ export const Login = () => {
     <>
       <section className="backgroundPpal"></section>
       <section className="contentPpal">
-        <div className="cardFormRegister">
-        <h3>Login</h3>
+        <div className="cardFromLogin">
+        <div className="header">
+          <h3>Login</h3>
+        </div>
           <Form onSubmit={handleSubmit(onSubmit)}>
-            <Form.Group className="mb-2">
+            <Form.Group className="mb-2 email">
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 {...register("email", { required: "Must be filled" })}
@@ -76,15 +78,16 @@ export const Login = () => {
             <Form.Text className="text-danger">{errorMessage}</Form.Text>
 
             <Form.Text className=" fw-lighter text-light">
-              Not registered yet? Register <Link to={"/register"}>here</Link>
+              Not registered yet? Register <Link className="link" to={"/register"}>here</Link>
             </Form.Text>
-            <Form.Group className="mt-3 d-flex justify-content-between">
-              <Button variant="outline-danger" onClick={() => navigate(-1)}>
+            
+            <Form.Group className="mt-3 d-flex justify-content-evenly">
+              <Button className="cancelButton" variant="outline-danger" onClick={() => navigate(-1)}>
                 Cancel
               </Button>
 
-              <Button variant="outline-success" type="submit">
-                Submit
+              <Button className="submitButton" variant="outline-success" type="submit">
+                <span>Submit</span>
               </Button>
             </Form.Group>
 

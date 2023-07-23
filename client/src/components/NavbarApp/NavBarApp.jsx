@@ -11,14 +11,14 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { GiBookshelf } from "react-icons/gi";
 
-import "../../../public/styles/navbar/navbarStyle.scss";
+import "/public/styles/navbar/navbarStyle.scss";
 
 export const NavBarApp = () => {
   const navigate = useNavigate();
   return (
     <Navbar
       expand="lg"
-      className="bg-body-tertiary navbarApp"
+      className="bg-body-tertiary navbarApp p-0"
       bg="dark"
       data-bs-theme="dark"
     >
@@ -26,9 +26,9 @@ export const NavBarApp = () => {
         <Navbar.Brand
           as={Link}
           to="/"
-          className="ps-3 mb-0 d-flex gap-2 align-items-center"
+          className="ps-3 mb-0 d-flex gap-2 align-items-center p-0"
         >
-         <GiBookshelf className="fs-2" /> My Library 
+         {/* <GiBookshelf className="fs-2" /> */} <img src="/images/appImages/logobg.png" alt=""  className="logo"/> <div>Night<span>Owl</span> Reads </div>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} />
         <Navbar.Offcanvas

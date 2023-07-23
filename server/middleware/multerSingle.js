@@ -1,9 +1,9 @@
 const multer = require("multer");
-function uploadImage(a) {
+function uploadImage(filename) {
   const storage = multer.diskStorage({
     
-    // destination: `../client/./public/images/${a}`,
-    destination: `./public/images/${a}`,
+    // destination: `../client/./public/images/${filename}`,
+    destination: `./public/images/${filename}`,
 
     filename: function (req, file, callback) {
       callback(null, "Id-" + Date.now() + "-" + file.originalname);

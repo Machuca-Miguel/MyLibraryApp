@@ -3,13 +3,13 @@ import { AppContext } from "../../../context/AppProvider";
 import { getLastReadingDateObject } from "../../../helpers/dates";
 
 export const LastReadingBook = () => {
-  const [lastBook, setLastBook] = useState();
+  const [lastBookReading, setLastBookReading] = useState();
 
   const { bookshelf, isLogged } = useContext(AppContext);
 
   useEffect(() => {
     if (bookshelf) {
-      setLastBook(getLastReadingDateObject(bookshelf));
+      setLastBookReading(getLastReadingDateObject(bookshelf));
     }
 
     return () => {};
@@ -19,13 +19,14 @@ export const LastReadingBook = () => {
     <div className="readingBook">
       <h5>Reading books</h5>
       <div className="coverCont">
-        <img
-          src={`/images/appImages/bookCovers/${lastBook?.cover_img}`}
-          alt=""
-        />
+        {lastBookReading?.user_cover_img ? (
+          <img src={`${lastBookReading?.user_cover_img}`} alt="" />
+        ) : (
+          <img src={`${lastBookReading?.book_cover_img}`} alt="" />
+        )}
       </div>
       <div className="titleCont">
-        <h6>{lastBook?.title}</h6>
+        <h6>{lastBookReading?.title}</h6>
       </div>
     </div>
   );

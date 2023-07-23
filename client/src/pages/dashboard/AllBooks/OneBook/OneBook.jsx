@@ -1,36 +1,33 @@
-import axios from 'axios';
-import React, { useState } from 'react'
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import "../../../../../public/styles/oneBook/oneBookStyle.scss"
-import { OneBookCard } from './OneBookCard';
-
+import axios from "axios";
+import React, { useState } from "react";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { OneBookCard } from "./OneBookCard";
+import "/public/styles/oneBook/oneBookStyle.scss";
 
 export const OneBook = () => {
-  const [oneBookData, setoneBookData] = useState()
-  let {type,key} = useParams();
-  
-  useEffect(() => {
+  const [oneBookData, setoneBookData] = useState();
 
-    axios.get(`https://openlibrary.org/${type}/${key}.json?lang=es`)
+  let { type, olid } = useParams();
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://openlibrary.org/search.json?q=${olid}`
+      )
       .then((res) => {
-        console.log(res)
-        setoneBookData(res.data)
-      })
-    
-  
-    return () => {
-      
-    }
-  }, [])
-  
+        setoneBookData(res.data.docs[0]);
+        console.log(res.data.docs[0], "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+      });
+
+    return () => {};
+  }, []);
   return (
     <>
-    <section className='sectionBgOneBooks'></section>
-    <section className='contentSection'>
-
-     <OneBookCard oneBookData={oneBookData}/>
-    </section>
+      <section className="sectionBgOneBooks"></section>
+      <section className="contentSection">
+        <OneBookCard oneBookData={oneBookData} olid={olid} />
+      </section>
     </>
-  )
-}
+  );
+};
