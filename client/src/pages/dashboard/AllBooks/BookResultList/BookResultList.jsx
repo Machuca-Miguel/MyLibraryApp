@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../../../context/AppProvider";
 
-export const BookResultList = ({ showResult, setShowResult, search }) => {
+export const BookResultList = ({  search }) => {
   const [animation, setAnimation] = useState(false);
   const navigate = useNavigate();
-  const { searchResult } = useContext(AppContext);
+  const { searchResult, showResult, setShowResult, } = useContext(AppContext);
 
   useEffect(() => {
     if (searchResult?.length > 0) {
@@ -50,7 +50,7 @@ export const BookResultList = ({ showResult, setShowResult, search }) => {
                   <h3 className="mb-0 align-self-start">
                     {search
                       ? `Results of ${search?.bookSearch}`
-                      : "Last Results"}
+                      : "Searching Results"}
                   </h3>
                   <hr className="mt-0" />
 
@@ -69,7 +69,7 @@ export const BookResultList = ({ showResult, setShowResult, search }) => {
                             className="box"
                             key={element.key}
                             onClick={() =>
-                              navigate(`/allBooks/oneBook${element.key}`)
+                              navigate(`/allBooks/oneBook${element.seed[0]}`)
                             }
                           >
                             <td>

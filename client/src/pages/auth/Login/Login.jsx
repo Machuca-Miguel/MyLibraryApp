@@ -26,7 +26,7 @@ export const Login = () => {
       .post("http://localhost:4000/users/login", data)
       .then((res) => {
         console.log(res);
-        // setUser(res.data.user);
+        setUser(res.data.user);
         saveLocalStorage("token", res.data.token);
         setIsLogged(true);
 

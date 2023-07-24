@@ -4,10 +4,10 @@ USE my_library;
 -- DROP DATABASE my_library;
 
 
-SELECT * FROM user;
-SELECT * FROM user_book;
-SELECT * FROM book;
-SELECT * FROM author;
+-- SELECT * FROM user;
+-- SELECT * FROM user_book;
+-- SELECT * FROM book;
+-- SELECT * FROM author;
 
 CREATE TABLE user (
     user_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -39,10 +39,11 @@ CREATE TABLE book (
     format VARCHAR(50),
     pages_number INT UNSIGNED,
     publish_year SMALLINT,
-    isbn BIGINT UNSIGNED,
+    isbn VARCHAR(13) ,
     sinopsis VARCHAR(200),
     is_deleted BOOLEAN DEFAULT FALSE
 );
+ALTER TABLE book ADD COLUMN cover_img VARCHAR(200);
 
 CREATE TABLE user_book (
     user_id INT UNSIGNED,
@@ -143,4 +144,10 @@ VALUES
 
 
 
-
+SELECT book.title ,book.genre ,book.pages_number ,book.cover_img AS book_cover_img , user_book.is_read_date, user_book.to_read_date, user_book.added_reading_date, user_book.wishlist_date, user_book.cover_img AS user_cover_img,  author.author_name FROM user
+    JOIN user_book ON user.user_id = user_book.user_id
+    JOIN book ON user_book.book_id = book.book_id
+    JOIN author ON book.author_id = author.author_id
+    WHERE user.is_deleted = 0
+      AND book.is_deleted = 0
+      AND user.user_id = 2;

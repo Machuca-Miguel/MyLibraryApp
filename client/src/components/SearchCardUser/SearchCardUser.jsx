@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../context/AppProvider";
 
 export const SearchCardUser = () => {
-    const {setSearchResult} = useContext(AppContext)
+    const {setSearchResult, setShowResult} = useContext(AppContext)
 
     const navigate = useNavigate();
     const {
@@ -28,6 +28,7 @@ export const SearchCardUser = () => {
           setSearchResult(res.data.docs);
         })
         .catch((error) => console.log(error));
+        setShowResult(true)
       reset({ bookSearch: "" });
       navigate("/allBooks")
     };

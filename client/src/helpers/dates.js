@@ -1,22 +1,22 @@
-
-
 const getLastDateObject = (objectsArray, category) => {
   let result = null;
 
   if (objectsArray.length > 0) {
-    let lastElement = objectsArray[0];
+    const defaultDate = new Date('1900-01-01');
+    let lastDate = defaultDate;
 
     for (let element of objectsArray) {
-      if (element[category] > lastElement[category]) {
-        lastElement = element;
+      const currentDate = element[category] ? new Date(element[category]) : defaultDate;
+      if (currentDate > lastDate) {
+        lastDate = currentDate;
+        result = element;
       }
     }
-
-    result = lastElement;
   }
 
   return result;
 };
+
 
 export const getLastIsReadDateObject = (objectsArray) => {
   return getLastDateObject(objectsArray, "is_read_date");

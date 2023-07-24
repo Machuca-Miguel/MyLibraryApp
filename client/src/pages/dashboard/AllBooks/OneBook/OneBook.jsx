@@ -6,27 +6,31 @@ import { OneBookCard } from "./OneBookCard";
 import "/public/styles/oneBook/oneBookStyle.scss";
 
 export const OneBook = () => {
-  const [oneBookData, setoneBookData] = useState();
+  const [oneBookSearchData, setOneBookSearchData] = useState();
 
   let { type, olid } = useParams();
 
   useEffect(() => {
     axios
       .get(
-        `https://openlibrary.org/search.json?q=${olid}`
+        `https://openlibrary.org/search.json?q=${olid}&lang=en`
       )
       .then((res) => {
-        setoneBookData(res.data.docs[0]);
+        setOneBookSearchData(res.data.docs[0]);
         console.log(res.data.docs[0], "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-      });
+      }).catch((err) => console.log(err))
+
+ 
 
     return () => {};
   }, []);
+
+  
   return (
     <>
       <section className="sectionBgOneBooks"></section>
       <section className="contentSection">
-        <OneBookCard oneBookData={oneBookData} olid={olid} />
+        <OneBookCard oneBookSearchData={oneBookSearchData} olid={olid} />
       </section>
     </>
   );

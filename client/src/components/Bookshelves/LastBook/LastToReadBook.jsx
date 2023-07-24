@@ -7,7 +7,6 @@ export const LastToReadBook = () => {
   const [lastBookToRead, setLastBookToRead] = useState();
   const navigate = useNavigate();
 
-  //Context use
   const { bookshelf, isLogged } = useContext(AppContext);
 
   useEffect(() => {
@@ -17,7 +16,7 @@ export const LastToReadBook = () => {
 
     return () => {};
   }, [isLogged]);
-
+console.log(lastBookToRead, "TOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
   return (
     <div className="toRead" onClick={() => navigate("/mybookshelf")}>
       <h5>Books to read</h5>
@@ -25,7 +24,7 @@ export const LastToReadBook = () => {
         {lastBookToRead?.user_cover_img ? (
           <img src={`${lastBookToRead?.user_cover_img}`} alt="" />
         ) : (
-          <img src={`${lastBookToRead?.book_cover_img}`} alt="" />
+          <img src={`https://covers.openlibrary.org/b/olid/${lastBookToRead?.book_cover_img}-L.jpg`} alt="" />
         )}
       </div>
       <div className="titleCont">

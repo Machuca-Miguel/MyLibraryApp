@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Button,
   Container,
+  Dropdown,
   Form,
   Nav,
   NavDropdown,
@@ -10,11 +11,15 @@ import {
 } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { GiBookshelf } from "react-icons/gi";
+import avatarDefault from "../../../public/images/appImages/avatarDefault.png";
 
 import "/public/styles/navbar/navbarStyle.scss";
+import { AppContext } from "../../context/AppProvider";
+
 
 export const NavBarApp = () => {
   const navigate = useNavigate();
+  const { user, isLogged } = useContext(AppContext);
   return (
     <Navbar
       expand="lg"
@@ -26,11 +31,16 @@ export const NavBarApp = () => {
         <Navbar.Brand
           as={Link}
           to="/"
-          className="ps-3 mb-0 d-flex gap-2 align-items-center p-0"
+          className="ps-3 mb-0 d-flex gap-2 align-items-center p-0 flex-fill flex-lg-grow-0"
         >
-         {/* <GiBookshelf className="fs-2" /> */} <img src="/images/appImages/logobg.png" alt=""  className="logo"/> <div>Night<span>Owl</span> Reads </div>
+          {/* <GiBookshelf className="fs-2" /> */}{" "}
+          <img src="/images/appImages/logobg.png" alt="" className="logo" />{" "}
+          <div>
+            Night<span>Owl</span> Reads{" "}
+          </div>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} />
+
+        <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} className="order-2"/>
         <Navbar.Offcanvas
           id={`offcanvasNavbar-expand-lg`}
           aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
@@ -51,21 +61,29 @@ export const NavBarApp = () => {
               <Nav.Link as={Link} to="/allBooks">
                 All books
               </Nav.Link>
-              <NavDropdown
-                title="My Bookshelves"
-                id={`offcanvasNavbarDropdown-expand-lg`}
-              >
-                <NavDropdown.Item as={Link} to="#action3">
-                  Action
-                </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="#action4">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item as={Link} to="#action5">
-                  Something else here
-                </NavDropdown.Item>
-              </NavDropdown>
+              {user?.type === 0 && (
+                <>
+                  <Nav.Link as={Link} to="/user">
+                    My Profile
+                  </Nav.Link>
+
+                  <NavDropdown
+                    title="My Bookshelves"
+                    id={`offcanvasNavbarDropdown-expand-lg`}
+                  >
+                    <NavDropdown.Item as={Link} to="#action3">
+                      Action
+                    </NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="#action4">
+                      Another action
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item as={Link} to="#action5">
+                      Something else here
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </>
+              )}
               <NavDropdown
                 title="Dropdown"
                 id={`offcanvasNavbarDropdown-expand-lg`}
@@ -82,14 +100,51 @@ export const NavBarApp = () => {
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
+          </Offcanvas.Body>
+        </Navbar.Offcanvas>
+        {isLogged ? (
+          <Dropdown  drop="dawn"  align={"end"} className="avatarCont order-1" focusFirstItemOnShow={false}
+          >
+            
+            <Dropdown.Toggle className="avatar"
+              
+              
+              >
+              
+                <img
+                  src={
+                    user?.profile_img
+                    ? `http://localhost:4000/images/user/${user?.profile_img}`
+                      : avatarDefault
+                    }
+                  alt="avatar"
+                  />
+         
+              
+            </Dropdown.Toggle>
+            <Dropdown.Menu 
+            className="avatarMenu"
+            >
+            <Dropdown.Item href="#/action-1" >
+            Action
+          </Dropdown.Item>
+          <Dropdown.Divider />
+
+          <Dropdown.Item as={Link} to="/user">My profile</Dropdown.Item>
+          <Dropdown.Divider />
+
+          <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        ) : (
+          <>
             <Form className="d-flex gap-2">
               {/* <Form.Control
-                    type="search"
-                    placeholder="Search"
-                    className="me-2"
-                    aria-label="Search"
-                  /> */}
-
+                          type="search"
+                          placeholder="Search"
+                          className="me-2"
+                          aria-label="Search"
+                        /> */}
               <Button variant="none" onClick={() => navigate("/login")}>
                 Login
               </Button>
@@ -100,8 +155,8 @@ export const NavBarApp = () => {
                 Sign Up
               </Button>
             </Form>
-          </Offcanvas.Body>
-        </Navbar.Offcanvas>
+          </>
+        )}
       </Container>
     </Navbar>
   );

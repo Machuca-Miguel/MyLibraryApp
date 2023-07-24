@@ -5,8 +5,8 @@ import { useForm } from "react-hook-form";
 import { AppContext } from "../../../../context/AppProvider";
 
 
-export const SearchCard = ({  setShowResult, setSearch }) => {
-  const {setSearchResult} = useContext(AppContext)
+export const SearchCard = ({   setSearch }) => {
+  const {setSearchResult, setShowResult} = useContext(AppContext)
 
   
   const {
