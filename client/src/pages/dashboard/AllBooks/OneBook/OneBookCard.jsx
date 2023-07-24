@@ -4,28 +4,41 @@ import { AppContext } from "../../../../context/AppProvider";
 import loadingAnimation from "../../../../../public/images/appImages/loadingAnimation.gif";
 import { Spinner } from "react-bootstrap";
 
-export const OneBookCard = ({ oneBookData, olid }) => {
+export const OneBookCard = ({ oneBookSearchData, olid }) => {
   const [bookDataToAdd, setbookDataToAdd] = useState({});
+  const [loading, setLoading] = useState();
   const { user } = useContext(AppContext);
 
-
   useEffect(() => {
+    setLoading(true);
     setbookDataToAdd({
       ...bookDataToAdd,
-      title: oneBookData?.title,
-      genre: oneBookData?.subjects ? oneBookData.subjects[0]?.name : "",
-      pages_number: oneBookData?.number_of_pages,
-      publish_year: oneBookData?.first_publish_year,
-      isbn: oneBookData?.identifiers?.isbn_13,
-      sinopsis: oneBookData?.first_sentence && oneBookData?.first_sentence[0]  ,
-      author_name: oneBookData?.authors && oneBookData.authors[0]?.name,
-      cover_img: oneBookData?.cover_edition_key,
+      title: oneBookSearchData?.title,
+      genre: oneBookSearchData?.subject ? oneBookSearchData.subject[0] : null,
+      pages_number: oneBookSearchData?.number_of_pages_median
+        ? oneBookSearchData?.number_of_pages_median
+        : null,
+      publish_year: oneBookSearchData?.first_publish_year
+        ? oneBookSearchData?.first_publish_year
+        : null,
+      isbn: oneBookSearchData?.isbn ? oneBookSearchData?.isbn[0] : null,
+      sinopsis: oneBookSearchData?.first_sentence
+        ? oneBookSearchData?.first_sentence[oneBookSearchData?.first_sentence.length - 1].split('.')[0].trim()
+        : null,
+      author_name: oneBookSearchData?.author_name
+        ? oneBookSearchData.author_name[0]
+        : "Anonimous",
+      cover_img: oneBookSearchData?.cover_edition_key
+        ? oneBookSearchData?.cover_edition_key
+        : null,
     });
+
+    oneBookSearchData && setLoading(false);
     return () => {};
-  }, [oneBookData, olid]);
+  }, [oneBookSearchData, olid]);
 
   const bookCardBg = {
-    backgroundImage: `url('https://covers.openlibrary.org/b/olid/${oneBookData?.cover_edition_key}-L.jpg')`,
+    backgroundImage: `url('https://covers.openlibrary.org/b/olid/${oneBookSearchData?.cover_edition_key}-L.jpg')`,
   };
 
   const handleSubmit = (category) => {
@@ -41,10 +54,11 @@ export const OneBookCard = ({ oneBookData, olid }) => {
   useEffect(() => {
     // Axios only when any of the buttons categories exist.
     if (
-      (user?.user_id && bookDataToAdd.to_read_date) ||
+      user?.user_id &&
+      (bookDataToAdd.to_read_date ||
       bookDataToAdd.is_read_date ||
       bookDataToAdd.wishlist_date ||
-      bookDataToAdd.added_reading_date
+      bookDataToAdd.added_reading_date)
     ) {
       axios
         .post(
@@ -60,6 +74,10 @@ export const OneBookCard = ({ oneBookData, olid }) => {
     }
   }, [bookDataToAdd]);
 
+  const imageLoaded = (e) => {
+    e.target.classList.add("loaded");
+  };
+
   return (
     <div className="oneBookCard">
       <div className="backgroundImage" style={bookCardBg}></div>
@@ -68,55 +86,90 @@ export const OneBookCard = ({ oneBookData, olid }) => {
           <h3>Book Details</h3>
         </div>
         <div className="coverImg">
-          {oneBookData?.cover_edition_key ? (
-            <img src={`https://covers.openlibrary.org/b/olid/${oneBookData?.cover_edition_key}-L.jpg`} alt="cover" />
+          {loading ? (
+            <>
+              <Spinner animation="border" role="status">
+                <span className="visually-hidden ">Loading...</span>
+              </Spinner>
+            </>
           ) : (
-            <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
+            <>
+              {oneBookSearchData?.cover_i ? (
+                <>
+                  <img
+                    src={`https://covers.openlibrary.org/b/id/${oneBookSearchData?.cover_i}-L.jpg`}
+                    alt="cover"
+                    onLoad={imageLoaded}
+                    className="cover"
+                  />
+                </>
+              ) : (
+                <div className="errorCont">
+                  <img
+                    className="error"
+                    src="/images/appImages/error.gif"
+                    alt=""
+                  />
+                  <h6>Upss.., not avaliable</h6>
+                </div>
+              )}
+            </>
           )}
         </div>
         <div className="contentInfo">
           <div>
-            <h6>Title: </h6>
-            <h4> {oneBookData?.title ? oneBookData?.title : <img className="loadingGif" src={loadingAnimation} alt="" /> }</h4>
+            {oneBookSearchData?.title ? (
+              <>
+                <h6>Title: </h6>
+                <h4>{oneBookSearchData?.title}</h4>
+              </>
+            ) : (
+              <img className="loadingGif" src={loadingAnimation} alt="" />
+            )}
           </div>
           <div>
-            <h6>Author: </h6>{oneBookData?.author_name === "" ? <h4>Unknown</h4> : <>
-            {oneBookData?.author_name ? 
-            <h4> {oneBookData?.author_name[0]}</h4>
-            : <h4> <img className="loadingGif" src={loadingAnimation} alt="" /> </h4>
-            }
-            </>}
+            {oneBookSearchData?.author_name && (
+              <>
+                <h6>Author: </h6>
+                <h4> {oneBookSearchData?.author_name[0]}</h4>
+              </>
+            )}
           </div>
           <div>
-              {oneBookData?.subjects &&<>
-            <h6>Genre: </h6>
-            <h4>
-              
-              {oneBookData.subjects[0]?.name}, {oneBookData.subjects[1]?.name}
-            </h4>
-              </> }
+            {oneBookSearchData?.subject && (
+              <>
+                <h6>Genre: </h6>
+                <h5>
+                  {oneBookSearchData.subject[0]},{oneBookSearchData.subject[1]}
+                </h5>
+              </>
+            )}
           </div>
           <div className="d-flex gap-5">
             <div>
-              <h6>Publish Year: </h6>
-              <h4> {oneBookData?.first_publish_year}</h4>
+              {oneBookSearchData?.publish_date && (
+                <>
+                  <h6>Publish Date: </h6>
+                  <h4>{oneBookSearchData?.publish_date[0]}</h4>
+                </>
+              )}
             </div>
             <div>
-              {oneBookData?.number_of_pages_median && <>
-              <h6>Nº of pages: </h6>
-              <h4> {oneBookData?.number_of_pages_median}</h4>
-              </>}
+              {oneBookSearchData?.number_of_pages_median && (
+                <>
+                  <h6>Nº of pages: </h6>
+                  <h4> {oneBookSearchData?.number_of_pages_median}</h4>
+                </>
+              )}
             </div>
           </div>
         </div>
-        {oneBookData?.first_sentence && 
-        <div className="moreContent">
-          <h6>First sentence</h6>
-          <h5>{oneBookData?.first_sentence}</h5>
-        </div>
-        }
+        {oneBookSearchData?.first_sentence && (
+          <div className="moreContent">
+            <h6>First sentence</h6>
+            <h5>{oneBookSearchData?.first_sentence[oneBookSearchData?.first_sentence.length - 1].split('.')[0].trim()}</h5>
+          </div>
+        )}
         <div className="footer">
           <button
             onClick={() => {

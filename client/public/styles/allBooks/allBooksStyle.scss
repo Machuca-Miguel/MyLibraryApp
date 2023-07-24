@@ -17,15 +17,18 @@
   padding: calc(4vh + 50px) 4vw 4vh 4vw;
   display: grid;
   grid-template:
-    "searchCard bookListCard bookListCard"
-    "userCard bookListCard bookListCard"
-    "none bookListCard bookListCard";
-  grid-template-columns: 1fr 1fr 1fr;
+    "searchCard bookListCard "
+    "userCard bookListCard "
+    "none bookListCard ";
+  grid-template-columns: 1fr auto;
   grid-template-rows: auto 10fr 10fr;
   grid-gap: 16px;
 
+ 
   .searchCard {
+    grid-area: searchCard;
     width: 100%;
+    min-width: 29vw;
     border: 1px solid $borderColor;
     border-radius: 8px;
     background-color: $bgColorLightGreen;
@@ -89,6 +92,8 @@
 
   .bookListCard {
     height: fit-content;
+    min-width: 60vw;
+
     grid-area: bookListCard;
     border: 1px solid $borderColor;
     border-radius: 8px;
@@ -106,16 +111,16 @@
     position: relative;
 
     .loadingImg {
-      width: 250px;
-      aspect-ratio: 1/1;
+      display: flex;
+      align-items: center;
+      width: 80px;
       position: relative;
-      top: calc(50% - 75px);
-
+      top: calc(50% - 40px );
+      
       img {
         width: 100%;
-        aspect-ratio: 1/1;
         mix-blend-mode: multiply;
-        filter: hue-rotate(280deg);
+        filter: hue-rotate(70deg);
       }
 
     }

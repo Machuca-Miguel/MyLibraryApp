@@ -16,7 +16,7 @@ class userControllers {
     bcrypt.genSalt(saltRounds, function (err, saltRounds) {
       bcrypt.hash(password, saltRounds, function (err, hash) {
         // Creating insertion to DDBB
-        let sql = `INSERT INTO user (user_name ,name , last_name, age , email, password) VALUES ( '${user_name}', '${name}', '${last_name}', ${age}, '${email}', '${hash}')`;
+        let sql = `INSERT INTO user (user_name ,name , last_name, age , email, password) VALUES ( "${user_name}", "${name}", "${last_name}", ${age}, "${email}", "${hash}")`;
 
         // Insertion into DDBB
         connection.query(sql, (error, result) => {
@@ -38,7 +38,7 @@ class userControllers {
       req.body
     );
     let { email, password } = req.body;
-    let sql = `SELECT * FROM user WHERE email = '${email}'`;
+    let sql = `SELECT * FROM user WHERE email = "${email}"`;
 
     connection.query(sql, (error, result) => {
       console.log(result);

@@ -11,6 +11,9 @@ export const AppProvider = ({ children }) => {
   const [bookshelf, setBookshelf] = useState();
   const [isLogged, setIsLogged] = useState(false);
   const [searchResult, setSearchResult] = useState();
+  const [showResult, setShowResult] = useState(false)
+
+
 
   useEffect(() => {
     const localToken = getLocalStorage("token");
@@ -47,6 +50,8 @@ export const AppProvider = ({ children }) => {
         setBookshelf,
         searchResult,
         setSearchResult,
+        showResult, 
+        setShowResult
      
         
       }}

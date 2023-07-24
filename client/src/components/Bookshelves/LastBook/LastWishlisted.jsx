@@ -7,7 +7,6 @@ export const LastWishlisted = () => {
   const [lastBookWishlisted, setLastBookWishlisted] = useState();
   const navigate = useNavigate();
 
-  //Context use
   const { bookshelf, isLogged } = useContext(AppContext);
 
   useEffect(() => {
@@ -25,7 +24,7 @@ export const LastWishlisted = () => {
         {lastBookWishlisted?.user_cover_img ? (
           <img src={`${lastBookWishlisted?.user_cover_img}`} alt="" />
         ) : (
-          <img src={`${lastBookWishlisted?.book_cover_img}`} alt="" />
+          <img src={`https://covers.openlibrary.org/b/olid/${lastBookWishlisted?.book_cover_img}-L.jpg`} alt="" />
         )}
       </div>
       <div className="titleCont">

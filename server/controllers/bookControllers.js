@@ -19,8 +19,8 @@ class bookController {
 
     const { user_id } = req.params;
 
-    // Check if the author already exists in the 'author' table
-    const sqlCheckAuthor = `SELECT * FROM author WHERE author_name = '${author_name}'`;
+    // Check if the author already exists in the "author" table
+    const sqlCheckAuthor = `SELECT * FROM author WHERE author_name = "${author_name}"`;
     connection.query(sqlCheckAuthor, (error, results) => {
       if (error) {
         console.log(error);
@@ -28,12 +28,12 @@ class bookController {
       }
 
       if (results.length > 0) {
-        // The author already exists in the 'author' table
+        // The author already exists in the "author" table
         const authorId = results[0].author_id;
         insertBook(authorId);
       } else {
-        // The author does not exist in the 'author' table, insert it and continue with the process.
-        const sqlAuthor = `INSERT INTO author (author_name) VALUES ('${author_name}')`;
+        // The author does not exist in the "author" table, insert it and continue with the process.
+        const sqlAuthor = `INSERT INTO author (author_name) VALUES ("${author_name}")`;
         connection.query(sqlAuthor, (error, results) => {
           if (error) {
             console.log(error);
@@ -46,8 +46,8 @@ class bookController {
     });
 
     function insertBook(authorId) {
-      // Insert the book into the 'book' table using the 'authorId'
-      const sqlBook = `INSERT INTO book (author_id, title, genre, pages_number, publish_year, isbn, sinopsis, cover_img) VALUES (${authorId}, '${title}', '${genre}', ${pages_number}, ${publish_year}, ${isbn}, '${sinopsis}', '${cover_img}')`;
+      // Insert the book into the "book" table using the "authorId"
+      const sqlBook = `INSERT INTO book (author_id, title, genre, pages_number, publish_year, isbn, sinopsis, cover_img) VALUES (${authorId}, "${title}", "${genre}", ${pages_number}, ${publish_year}, "${isbn}", "${sinopsis}", "${cover_img}")`;
 
       connection.query(sqlBook, (error, results) => {
         if (error) {
@@ -57,7 +57,7 @@ class bookController {
 
         const bookId = results.insertId;
 
-        // Insert the information into the 'user_book' table using the 'bookId'
+        // Insert the information into the "user_book" table using the "bookId"
         if (to_read_date || is_read_date || wishlist_date || added_reading_date) {
           let category;
           let dateValue;
@@ -76,7 +76,7 @@ class bookController {
             dateValue = added_reading_date;
           }
 
-          const sqlUserBook = `INSERT INTO user_book (user_id, book_id, ${category}) VALUES (${user_id}, ${bookId}, '${dateValue}')`;
+          const sqlUserBook = `INSERT INTO user_book (user_id, book_id, ${category}) VALUES (${user_id}, ${bookId}, "${dateValue}")`;
           connection.query(sqlUserBook, (error, results) => {
             if (error) {
               console.log(error);
