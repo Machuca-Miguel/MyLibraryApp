@@ -1,0 +1,346 @@
+@import "../../../../public/styles/variables/variables";
+
+.backgroundPpal {
+  height: calc(100vh - 50px);
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background-image: url("/images/appImages/bgPpal3.jpg");
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+.contentPpal {
+  min-height: calc(100vh - 50px);
+  padding: calc(4vh + 50px) 4vw 4vh 4vw;
+  color: white;
+  display: grid;
+  grid-template:
+    "userCardEdition editionForm"
+    "userCardEdition bookshelfCard"
+    "none bookshelfCard";
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: auto auto 1fr;
+  grid-gap: 16px;
+  place-items: start;
+
+  .userCardEdition,
+  .editionForm,
+  .bookshelfCard {
+    border: 1px solid black;
+    background-color: #3a3a3a75;
+    box-shadow: $blackShadow;
+    border-radius: 16px;
+    width: 100%;
+    height: 100%;
+
+    height: fit-content;
+    backdrop-filter: blur(4px);
+  }
+
+  .userCardEdition {
+    padding: 24px;
+    grid-area: userCardEdition;
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+
+    .headlineCont {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .cardTitle {
+      text-transform: capitalize;
+      p {
+        margin: 0;
+      }
+    }
+
+    .profile_img {
+      width: 70px;
+      aspect-ratio: 1 / 1;
+      border-radius: 100%;
+      border: 2px solid;
+      outline: 1px solid;
+      outline-offset: 2px;
+    }
+
+    .cardInfo {
+      align-self: start;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+
+      p {
+        margin: 0;
+      }
+    }
+
+    .cardNavigation {
+      display: flex;
+      width: 100%;
+      justify-content: end;
+
+      button {
+        display: flex;
+        width: 100px;
+        border-radius: 10px;
+        border: 1px solid black;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.5s ease-in;
+        z-index: 1;
+        background-color: $bgColorLightGreen;
+        align-items: center;
+        gap: 8px;
+      }
+
+      button::before,
+      button::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 0;
+        height: 100%;
+        transform: skew(15deg);
+        transition: all 0.5s;
+        overflow: hidden;
+        z-index: -1;
+      }
+
+      button::before {
+        left: -10px;
+        background: #889473;
+      }
+
+      button::after {
+        right: -10px;
+        background: #b4c598;
+      }
+
+      button:hover::before,
+      button:hover::after {
+        width: 60%;
+      }
+    }
+  }
+  .editionForm {
+    grid-area: editionForm;
+    width: 100%;
+    display: grid;
+    grid-template:
+      "header"
+      "form";
+    transition: all 1s;
+    overflow: hidden;
+
+    .header {
+      grid-area: header;
+      padding: 24px;
+      padding-bottom: 0;
+      background-position: center;
+      background-repeat: repeat-x;
+      background-size: 50% auto;
+      overflow: hidden;
+      border-radius: 16px 16px 0 0;
+      transition: 0s;
+     
+
+      div {
+        h3 {
+          margin-bottom: 0;
+          font-size: 1.5rem;
+        }
+
+        button {
+          height: fit-content;
+          padding: 0;
+          border: none;
+          background-color: transparent;
+        }
+      }
+      hr {
+        margin-top: 0;
+        margin-bottom: 24px;
+      }
+    }
+    Form {
+      grid-area: form;
+      padding: 24px;
+      padding-top: 0;
+      display: grid;
+      grid-template:
+        " first_name first_name last_name last_name"
+        "user_name user_name user_name birth_year"
+        " biography biography biography biography"
+        "buttons buttons buttons buttons";
+
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+
+      gap: 8px;
+
+      .first_name {
+        grid-area: first_name;
+        min-width: 250px;
+      }
+      .last_name {
+        grid-area: last_name;
+        min-width: 250px;
+      }
+      .user_name {
+        grid-area: user_name;
+        min-width: 250px;
+
+        align-items: center;
+
+        .inputGroup {
+          max-height: 40px;
+        }
+      }
+      .biography {
+        grid-area: biography;
+        min-width: 250px;
+      }
+
+      .birth_year {
+        grid-area: birth_year;
+      }
+
+      .buttons {
+        grid-area: buttons;
+
+        .submitButton {
+          background-color: $bgColorLightGreen;
+        }
+        .cancelButton {
+          background-color: rgb(255, 86, 86);
+        }
+
+        .submitButton,
+        .cancelButton {
+          display: inline-block;
+          width: 150px;
+          border-radius: 10px;
+          border: 1px solid black;
+          position: relative;
+          overflow: hidden;
+          transition: all 0.5s ease-in;
+          z-index: 1;
+          color: black;
+        }
+
+        .submitButton::before,
+        .submitButton::after,
+        .cancelButton::before,
+        .cancelButton::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          width: 0;
+          height: 100%;
+          transform: skew(15deg);
+          transition: all 0.5s;
+          overflow: hidden;
+          z-index: -1;
+        }
+
+        .submitButton:hover::before,
+        .submitButton:hover::after,
+        .cancelButton:hover::before,
+        .cancelButton:hover::after {
+          width: 30%;
+        }
+
+        .submitButton::before {
+          left: -6px;
+          background: #889473;
+        }
+
+        .submitButton::after {
+          right: -6px;
+          background: #b4c598;
+        }
+
+        .cancelButton::before {
+          left: -6px;
+          background: #e34c4c;
+        }
+
+        .cancelButton::after {
+          right: -6px;
+          background: #ff6161;
+        }
+        .submitButton:hover {
+          color: white;
+        }
+        .cancelButton:hover {
+          color: white;
+        }
+      }
+    }
+  }
+  .bookshelfCard {
+    grid-area: bookshelfCard;
+    padding: 24px;
+    transition: height 1s;
+    h3 {
+      margin-bottom: 0;
+    }
+    hr {
+      margin-top: 0;
+    }
+
+    .contentCont {
+      padding: 0 8px;
+      transition: height 1s;
+      background-color: #3a3a3a75;
+      border-radius: 8px;
+
+      .contPpalLists {
+        ol {
+          li {
+            margin-bottom: 0;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+          }
+        }
+      }
+
+      .bookshlefCont {
+        display: flex;
+        transition: height 1s;
+        justify-content: space-between;
+        gap: 8px;
+        align-items: end;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.498);
+        margin-bottom: 8px;
+
+        h5,
+        h6 {
+          margin-bottom: 0;
+          z-index: 2;
+        }
+        h5 {
+          flex-grow: 1;
+        }
+
+        div {
+          height: 100%;
+          display: grid;
+          place-items: center;
+          padding: 4px;
+          padding-bottom: 0;
+        }
+      }
+
+      .bookshlefCountCont:not(:first-of-type) {
+        padding-top: 16px;
+      }
+    }
+  }
+}

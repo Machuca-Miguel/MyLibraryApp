@@ -3,11 +3,14 @@ import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../../../context/AppProvider";
 import loadingAnimation from "../../../../../public/images/appImages/loadingAnimation.gif";
 import { Spinner } from "react-bootstrap";
-
+import { AiOutlineArrowLeft } from "react-icons/ai"
+import { useNavigate } from "react-router-dom";
+ 
 export const OneBookCard = ({ oneBookSearchData, olid }) => {
   const [bookDataToAdd, setbookDataToAdd] = useState({});
   const [loading, setLoading] = useState();
   const { user } = useContext(AppContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -83,7 +86,7 @@ export const OneBookCard = ({ oneBookSearchData, olid }) => {
       <div className="backgroundImage" style={bookCardBg}></div>
       <div className="content">
         <div className="headline">
-          <h3>Book Details</h3>
+          <button onClick={()=>navigate(-1)}><AiOutlineArrowLeft/></button><h3>Book Details</h3>
         </div>
         <div className="coverImg">
           {loading ? (

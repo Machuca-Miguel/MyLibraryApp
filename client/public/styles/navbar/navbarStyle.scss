@@ -32,15 +32,23 @@
         background-color: transparent;
     }
 
-    .avatarMenu:active{
-        background-color: transparent;
-    }
-    .avatarMenu:focus{
-        background-color: transparent;
+    
+    .avatarMenu{
+      .item{
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .item:active{
+        background-color:transparent
+      }
     }
 
   }
   .avatar::after{
-    content: none;
-  }
+    
+    color: $borderColor ;
+} 
+
+
 }

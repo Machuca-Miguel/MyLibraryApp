@@ -11,10 +11,11 @@ import {
 } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { GiBookshelf } from "react-icons/gi";
+import { IoMdSettings } from "react-icons/io"
 import avatarDefault from "../../../public/images/appImages/avatarDefault.png";
 
-import "/public/styles/navbar/navbarStyle.scss";
 import { AppContext } from "../../context/AppProvider";
+import "/public/styles/navbar/navbarStyle.scss";
 
 
 export const NavBarApp = () => {
@@ -103,7 +104,7 @@ export const NavBarApp = () => {
           </Offcanvas.Body>
         </Navbar.Offcanvas>
         {isLogged ? (
-          <Dropdown  drop="dawn"  align={"end"} className="avatarCont order-1" focusFirstItemOnShow={false}
+          <Dropdown  drop="down"  align={"end"} className="avatarCont order-1" focusFirstItemOnShow={false}
           >
             
             <Dropdown.Toggle className="avatar"
@@ -125,15 +126,15 @@ export const NavBarApp = () => {
             <Dropdown.Menu 
             className="avatarMenu"
             >
-            <Dropdown.Item href="#/action-1" >
-            Action
+            <Dropdown.Item  className="item" as={Link} to= {`/userEdition/${user?.user_id}`} >
+            <IoMdSettings/> Settings
           </Dropdown.Item>
           <Dropdown.Divider />
 
-          <Dropdown.Item as={Link} to="/user">My profile</Dropdown.Item>
+          <Dropdown.Item as={Link} to="/user"  className="item"  >My profile</Dropdown.Item>
           <Dropdown.Divider />
 
-          <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+          <Dropdown.Item className="item" href="#/action-3">Something else</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         ) : (

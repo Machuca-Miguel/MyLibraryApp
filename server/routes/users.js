@@ -9,12 +9,12 @@ const verify = require("../middleware/verify");
 //-----------------------------------------------------
 //1.-Create new User
 //http://localhost:4000/users/createUser
-router. post("/createUser", userControllers.createUser);
+router.post("/createUser", userControllers.createUser);
 
 //-----------------------------------------------------
 //2.-Login
 //http://localhost:4000/users/login
-router. post("/login", userControllers.login);
+router.post("/login", userControllers.login);
 
 //------------------------------------------------------
 //3.-Get all data from user 

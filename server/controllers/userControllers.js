@@ -9,14 +9,14 @@ class userControllers {
 
   createUser = (req, res) => {
     // Get data from inputs
-    const { user_name, name, last_name, age, email, password } = req.body;
+    const { user_name, name, last_name, birth_year, email, password } = req.body;
 
     let saltRounds = 8;
     // Hashing password
     bcrypt.genSalt(saltRounds, function (err, saltRounds) {
       bcrypt.hash(password, saltRounds, function (err, hash) {
         // Creating insertion to DDBB
-        let sql = `INSERT INTO user (user_name ,name , last_name, age , email, password) VALUES ( "${user_name}", "${name}", "${last_name}", ${age}, "${email}", "${hash}")`;
+        let sql = `INSERT INTO user (user_name ,name , last_name, birth_year , email, password) VALUES ( "${user_name}", "${name}", "${last_name}", ${birth_year}, "${email}", "${hash}")`;
 
         // Insertion into DDBB
         connection.query(sql, (error, result) => {
@@ -128,16 +128,16 @@ class userControllers {
   //http://localhost:4000/users/oneUser/userEdition/:user_id ;
   editOneUser = (req, res) => {
     const user_id = req.params.user_id;
-    const { user_name, name, last_name, age } = req.body;
+    const { user_name, name, last_name, birth_year, biography } = req.body;
 
     let img = "";
 
-    let sql = `UPDATE user SET user_name = "${user_name}", name = "${name}", last_name = "${last_name}", age = ${age} WHERE user_id = ${user_id}`;
+    let sql = `UPDATE user SET user_name = "${user_name}", name = "${name}", last_name = "${last_name}", birth_year = ${birth_year}, biography ="${biography}" WHERE user_id = ${user_id}`;
 
     if (req.file != undefined) {
       img = req.file.filename;
 
-      sql = `UPDATE user SET user_name = "${user_name}", name = "${name}", last_name = "${last_name}", age = ${age}, profile_img = "${img}" WHERE user_id = ${user_id}`;
+      sql = `UPDATE user SET user_name = "${user_name}", name = "${name}", last_name = "${last_name}", birth_year = ${birth_year}, profile_img = "${img}" WHERE user_id = ${user_id}`;
     }
 
     connection.query(sql, (err, result) => {

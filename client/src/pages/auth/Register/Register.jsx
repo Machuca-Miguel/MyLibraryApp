@@ -61,17 +61,17 @@ export const Register = () => {
               </Form.Text>
             </Form.Group>
 
-            <Form.Group className="mb-2 age">
+            <Form.Group className="mb-2 birth_year">
               <Form.Label>Age</Form.Label>
               <Form.Control
-                {...register("age", {
+                {...register("birth_year", {
                   min: { value: 18, message: "Must be over 18" },
                 })}
                 type="number"
                 placeholder="Age"
               />
               <Form.Text className="text-danger">
-                {errors.age?.message}
+                {errors.birth_year?.message}
               </Form.Text>
             </Form.Group>
 
@@ -122,7 +122,7 @@ export const Register = () => {
             </Form.Group>
 
             <Form.Text className=" fw-lighter text-light linkText">
-              Already registered? Login{" "}
+              Already registered? Login
               <Link className="link" to={"/login"}>
                 here
               </Link>

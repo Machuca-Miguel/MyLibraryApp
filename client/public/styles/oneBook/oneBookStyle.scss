@@ -64,6 +64,23 @@
         text-align: center;
         background-color: #a3b18a;
         border-bottom: 1px solid black;
+        display: flex;
+        justify-content: center;
+        position: relative;
+
+        button{
+          position: absolute;
+          left: 0;
+          top:0;
+          background-color: transparent;
+          border: none;
+          padding: 0 10px;
+          font-size: 2rem;
+          height: 100%;
+          display: grid;
+          place-items: center;
+          color: black;
+        }
       }
 
       .coverImg {

@@ -12,6 +12,7 @@ export const AppProvider = ({ children }) => {
   const [isLogged, setIsLogged] = useState(false);
   const [searchResult, setSearchResult] = useState();
   const [showResult, setShowResult] = useState(false)
+  const [reset, setReset] = useState(false)
 
 
 
@@ -35,7 +36,7 @@ export const AppProvider = ({ children }) => {
     }
 
     return () => {};
-  }, [isLogged]);
+  }, [isLogged, reset]);
 
   return (
     <AppContext.Provider
@@ -51,7 +52,9 @@ export const AppProvider = ({ children }) => {
         searchResult,
         setSearchResult,
         showResult, 
-        setShowResult
+        setShowResult, 
+        reset,
+        setReset
      
         
       }}

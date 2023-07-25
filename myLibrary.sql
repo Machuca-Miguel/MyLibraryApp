@@ -1,13 +1,10 @@
 CREATE DATABASE my_library;
 
 USE my_library;
--- DROP DATABASE my_library;
+ -- DROP DATABASE my_library;
 
 
--- SELECT * FROM user;
--- SELECT * FROM user_book;
--- SELECT * FROM book;
--- SELECT * FROM author;
+
 
 CREATE TABLE user (
     user_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -22,6 +19,9 @@ CREATE TABLE user (
     is_deleted BOOLEAN DEFAULT FALSE,
     biography VARCHAR(150)
 );
+
+ALTER TABLE user
+CHANGE COLUMN age birth_year YEAR;
 
 CREATE TABLE author (
     author_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -44,6 +44,8 @@ CREATE TABLE book (
     is_deleted BOOLEAN DEFAULT FALSE
 );
 ALTER TABLE book ADD COLUMN cover_img VARCHAR(200);
+ALTER TABLE book MODIFY COLUMN sinopsis TEXT;
+
 
 CREATE TABLE user_book (
     user_id INT UNSIGNED,
@@ -62,6 +64,8 @@ CREATE TABLE user_book (
     FOREIGN KEY (user_id) REFERENCES user (user_id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (book_id) REFERENCES book (book_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+ALTER TABLE user_book ADD COLUMN is_deleted BOOLEAN DEFAULT FALSE;
 
 CREATE TABLE friendship (
     friendship_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -141,9 +145,21 @@ VALUES
     (5, 6),
     (6, 7),
     (7, 8);
+    
 
 
+SELECT * FROM user;
+SELECT * FROM user_book;
+SELECT * FROM book;
+-- SELECT * FROM author;
 
+SELECT
+    (SELECT COUNT(book_id)  FROM user_book WHERE is_deleted=0 AND is_read_date IS NOT NULL AND user_id = 4) AS Read_Bookshelf,
+    (SELECT COUNT(book_id)  FROM user_book WHERE is_deleted=0 AND to_read_date IS NOT NULL AND user_id = 4) AS To_Read_Bookshelf,
+    (SELECT COUNT(book_id)  FROM user_book WHERE is_deleted=0 AND added_reading_date IS NOT NULL AND user_id = 4) AS Reading_Bookshelf,
+    (SELECT COUNT(book_id)  FROM user_book WHERE is_deleted=0 AND wishlist_date IS NOT NULL AND user_id = 4) AS Wish_Bookshelf;
+    
+    
 SELECT book.title ,book.genre ,book.pages_number ,book.cover_img AS book_cover_img , user_book.is_read_date, user_book.to_read_date, user_book.added_reading_date, user_book.wishlist_date, user_book.cover_img AS user_cover_img,  author.author_name FROM user
     JOIN user_book ON user.user_id = user_book.user_id
     JOIN book ON user_book.book_id = book.book_id
