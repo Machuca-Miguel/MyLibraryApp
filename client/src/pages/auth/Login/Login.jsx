@@ -3,8 +3,6 @@ import { useForm } from "react-hook-form";
 import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-
-import "../../../../public/styles/login/loginStyle.scss";
 import { saveLocalStorage } from "../../../helpers/localStorage";
 import { AppContext } from "../../../context/AppProvider";
 

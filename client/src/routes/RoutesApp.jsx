@@ -20,11 +20,13 @@ import { AdminAuthors } from '../pages/Admin/AdminAuthors/AdminAuthors/AdminAuth
 import { AuthorEdition } from '../pages/Admin/AdminAuthors/AuthorEdition/AuthorEdition';
 import { AuthorRegister } from '../pages/Admin/AdminAuthors/AuthorRegister/AuthorRegister';
 import { AdminBooks } from '../pages/Admin/AdminBooks/AdminBooks/AdminBooks';
-import { BookRegister } from '../pages/Admin/AdminBooks/BookRegister/BookRegister';
-import { BookEdition } from '../pages/Admin/AdminBooks/BookEdition/BookEdition';
+
 import { AdminStats } from '../pages/Admin/Adminstats/AdminStats';
 import { AdminUser } from '../pages/Admin/AdminUsers/AdminUser';
 import { MyBookshelf } from '../pages/books/Bookshelf/MyBookshelf/MyBookshelf';
+import { UserOneBook } from "../pages/books/Bookshelf/UserOneBook/UserOneBook"
+import { BookRegister } from '../pages/Admin/AdminBooks/BookRegister/BookRegister';
+import { BookEdition } from '../pages/Admin/AdminBooks/BookEdition/BookEdition';
 
 export const RoutesApp = () => {
   return (
@@ -35,11 +37,13 @@ export const RoutesApp = () => {
             <Route path="/login" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
             <Route path="/user" element={<User/>}/>
-            <Route path="/userEdition" element={<UserEdition/>}/>
+            <Route path="/userEdition/:user_id" element={<UserEdition/>}/>
             <Route path="/allBooks" element={<AllBooks/>}/>
             <Route path="/allBooks/oneBook/:type/:olid" element={<OneBook/>}/>
 
+            <Route path="/userBooks/oneBook/:book_id/:user_id" element={<UserOneBook/>}/>
             <Route path="/bookshelf" element={<Bookshelf/>}/>
+
             <Route path="/mybookshelf" element={<MyBookshelf/>}>
 
                 <Route path="read" element={<ReadBooks/>}/>

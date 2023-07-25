@@ -110,6 +110,11 @@
     transition: all 0.5s ease-in;
     z-index: 1;
   }
+  button:hover {
+    transition: 0s;
+    box-shadow: $blackShadow;
+    background-color: $bgColorLightGreen;
+  }
 
   button::before,
   button::after {
@@ -235,9 +240,11 @@
     height: 85%;
     display: grid;
     grid-template: "readBook readingBook toRead whislist";
-    grid-template-columns: calc(25% - 10px)calc(25% - 10px)calc(25% - 10px)calc(25% - 10px);
+    grid-template-columns: calc(25% - 10px) calc(25% - 10px) calc(25% - 10px) calc(
+        25% - 10px
+      );
     grid-template-rows: 100%;
-    grid-gap:10px;
+    grid-gap: 10px;
     justify-content: space-between;
     text-align: center;
     place-items: center;
@@ -265,16 +272,19 @@
       width: 100%;
       aspect-ratio: 2/3;
       background-color: $bgColorLightCream;
-      border-radius: 8px;
+      border-radius: 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      border: 1px solid $borderColor;
+      border: 1px solid black;
       position: relative;
+      overflow: hidden;
 
-      h5{
+      h5 {
         position: absolute;
-
+        z-index: 3;
+        top:calc(50% - 0.75rem);
+        font-size: 1.5rem;
       }
 
       .coverCont {
@@ -287,11 +297,10 @@
           width: 100%;
           height: 100%;
           object-position: center;
-          
         }
       }
       .titleCont {
-        height: 30%;
+        height: fit-content;
         width: 100%;
         padding: 8px 0px;
         background-color: $bgColorLightCream;
@@ -302,29 +311,74 @@
         bottom: 0;
         border-radius: 0 0 8px 8px;
 
-        
         h6 {
-          overflow: hidden;
-          display: -webkit-box;
-          -webkit-line-clamp: 1;
-          -webkit-box-orient: vertical;
+          
           margin-bottom: 0;
           font-size: 1rem;
+          padding: 8px;
         }
       }
+    }
+    .readBook::before,
+    .readingBook::before,
+    .toRead::before,
+    .whislist::before,
+    .readBook::after,
+    .readingBook::after,
+    .toRead::after,
+    .whislist::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      transform: skew(32.5deg);
+      transition: all 0.8s;
+      overflow: hidden;
+      z-index: 2;
+      filter: brightness(90%);
+    }
+    .readBook::before,
+    .readingBook::before,
+    .toRead::before,
+    .whislist::before {
+      background-color: #889473;
+      left: -50%;
+    }
+    .readBook::after,
+    .readingBook::after,
+    .toRead::after,
+    .whislist::after {
+      background-color: #b4c598;
+      right: -50%;
+    }
+    .readBook:hover::before,
+    .readingBook:hover::before,
+    .toRead:hover::before,
+    .whislist:hover::before,
+    .readBook:hover::after,
+    .readingBook:hover::after,
+    .toRead:hover::after,
+    .whislist:hover::after {
+      width: 0;
     }
 
     .readBook:hover,
     .readingBook:hover,
     .toRead:hover,
     .whislist:hover {
+      transition: all 1s;
+      aspect-ratio: 2/3;
       cursor: pointer;
-      color: $bgColorLightCream;
       background-color: $bgColorLightGreen;
       font-size: x-large;
       box-shadow: $blackShadow;
       -webkit-box-shadow: $blackShadow;
       -moz-box-shadow: $blackShadow;
+
+      h5{
+        z-index: 0;
+      }
 
       img {
         transition: 0.5s;

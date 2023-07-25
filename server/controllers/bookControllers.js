@@ -37,7 +37,9 @@ class bookController {
         connection.query(sqlAuthor, (error, results) => {
           if (error) {
             console.log(error);
-            return res.status(500).json({ message: "Error inserting the author." });
+            return res
+              .status(500)
+              .json({ message: "Error inserting the author." });
           }
           const authorId = results.insertId;
           insertBook(authorId);
@@ -58,7 +60,12 @@ class bookController {
         const bookId = results.insertId;
 
         // Insert the information into the "user_book" table using the "bookId"
-        if (to_read_date || is_read_date || wishlist_date || added_reading_date) {
+        if (
+          to_read_date ||
+          is_read_date ||
+          wishlist_date ||
+          added_reading_date
+        ) {
           let category;
           let dateValue;
 
@@ -80,7 +87,9 @@ class bookController {
           connection.query(sqlUserBook, (error, results) => {
             if (error) {
               console.log(error);
-              return res.status(500).json({ message: "Error inserting into user_book." });
+              return res
+                .status(500)
+                .json({ message: "Error inserting into user_book." });
             }
 
             console.log("Successful insertions.");
@@ -92,6 +101,47 @@ class bookController {
         }
       });
     }
+  };
+
+  getAllMyBookshelves = (req, res) => {
+    const { user_id } = req.params;
+    console.log();
+    let sql = `SELECT book_id, title, 'Read_Bookshelf' AS category
+    FROM book
+    WHERE book_id IN (SELECT book_id FROM user_book WHERE user_id = ${user_id} AND is_read_date IS NOT NULL AND is_deleted = 0)
+    
+    UNION ALL
+    
+    SELECT book_id, title, 'To_Read_Bookshelf' AS category
+    FROM book
+    WHERE book_id IN (SELECT book_id FROM user_book WHERE user_id = ${user_id} AND to_read_date IS NOT NULL AND is_deleted = 0)
+    
+    UNION ALL
+    
+    SELECT book_id, title, 'Reading_Bookshelf' AS category
+    FROM book
+    WHERE book_id IN (SELECT book_id FROM user_book WHERE user_id = ${user_id} AND added_reading_date IS NOT NULL AND is_deleted = 0)
+    
+    UNION ALL
+    
+    SELECT book_id, title, 'Wish_Bookshelf' AS category
+    FROM book
+    WHERE book_id IN (SELECT book_id FROM user_book WHERE user_id = ${user_id} AND wishlist_date IS NOT NULL AND is_deleted = 0);
+    ;`;
+
+    connection.query(sql, (error, result) => {
+      error ? res.status(500).json(error) : res.status(200).json(result);
+    });
+  };
+
+  getOneBook = (req, res) => {
+    const { book_id, user_id } = req.params;
+
+    const sql = `SELECT * FROM user_book WHERE user_id = ${user_id} and book_id = ${book_id}`;
+
+    connection.query(sql, (err, result) => {
+      err ? res.status(500).json(err) : res.status(200).json(result);
+    });
   };
 }
 
