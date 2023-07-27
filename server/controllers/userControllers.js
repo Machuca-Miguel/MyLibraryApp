@@ -33,10 +33,7 @@ class userControllers {
   //http://localhost:4000/users/login
 
   login = (req, res) => {
-    console.log(
-      "reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeq",
-      req.body
-    );
+    
     let { email, password } = req.body;
     let sql = `SELECT * FROM user WHERE email = "${email}"`;
 

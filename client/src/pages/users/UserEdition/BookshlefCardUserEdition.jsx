@@ -8,10 +8,10 @@ export const BookshlefCardUserEdition = ({ user_id }) => {
   const [showTitles, setShowTitles] = useState(0);
   
 
-  const [counter1, setCounter1] = useState()
-  const [counter2, setCounter2] = useState()
-  const [counter3, setCounter3] = useState()
-  const [counter4, setCounter4] = useState()
+  const [counter1, setCounter1] = useState(0)
+  const [counter2, setCounter2] = useState(0)
+  const [counter3, setCounter3] = useState(0)
+  const [counter4, setCounter4] = useState(0)
   useEffect(() => {
     console.log(user_id);
     if (user_id) {

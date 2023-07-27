@@ -147,7 +147,6 @@
       overflow: hidden;
       border-radius: 16px 16px 0 0;
       transition: 0s;
-     
 
       div {
         h3 {
@@ -308,39 +307,45 @@
             -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
           }
+          li:hover {
+            background-color: #64646475;
+            cursor: pointer;
+          }
+        }
+        .bookshlefCont {
+          display: flex;
+          transition: height 1s;
+          justify-content: space-between;
+          gap: 8px;
+          align-items: end;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.498);
+          margin-bottom: 8px;
+
+          h5,
+          h6 {
+            margin-bottom: 0;
+            z-index: 2;
+          }
+          h5 {
+            flex-grow: 1;
+          }
+
+          div {
+            height: 100%;
+            display: grid;
+            place-items: center;
+            padding: 4px;
+            padding-bottom: 0;
+          }
+        }
+        .bookshlefCont:hover {
+          cursor: pointer;
+          background-color: #64646475;
+        
         }
       }
-
-      .bookshlefCont {
-        display: flex;
-        transition: height 1s;
-        justify-content: space-between;
-        gap: 8px;
-        align-items: end;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.498);
-        margin-bottom: 8px;
-
-        h5,
-        h6 {
-          margin-bottom: 0;
-          z-index: 2;
-        }
-        h5 {
-          flex-grow: 1;
-        }
-
-        div {
-          height: 100%;
-          display: grid;
-          place-items: center;
-          padding: 4px;
-          padding-bottom: 0;
-        }
-      }
-
-      .bookshlefCountCont:not(:first-of-type) {
-        padding-top: 16px;
-      }
+      
+      
     }
   }
 }
