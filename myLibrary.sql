@@ -45,6 +45,7 @@ CREATE TABLE book (
 );
 ALTER TABLE book ADD COLUMN cover_img VARCHAR(200);
 ALTER TABLE book MODIFY COLUMN sinopsis TEXT;
+ALTER TABLE book MODIFY COLUMN title  VARCHAR(200);
 
 
 CREATE TABLE user_book (
@@ -153,12 +154,29 @@ SELECT * FROM user_book;
 SELECT * FROM book;
 -- SELECT * FROM author;
 
-SELECT
-    (SELECT COUNT(book_id)  FROM user_book WHERE is_deleted=0 AND is_read_date IS NOT NULL AND user_id = 4) AS Read_Bookshelf,
-    (SELECT COUNT(book_id)  FROM user_book WHERE is_deleted=0 AND to_read_date IS NOT NULL AND user_id = 4) AS To_Read_Bookshelf,
-    (SELECT COUNT(book_id)  FROM user_book WHERE is_deleted=0 AND added_reading_date IS NOT NULL AND user_id = 4) AS Reading_Bookshelf,
-    (SELECT COUNT(book_id)  FROM user_book WHERE is_deleted=0 AND wishlist_date IS NOT NULL AND user_id = 4) AS Wish_Bookshelf;
-    
+SELECT title, 'Read_Bookshelf' AS category
+FROM book
+WHERE book_id IN (SELECT book_id FROM user_book WHERE user_id = 4 AND is_read_date IS NOT NULL AND is_deleted = 0)
+
+UNION ALL
+
+SELECT title, 'To_Read_Bookshelf' AS category
+FROM book
+WHERE book_id IN (SELECT book_id FROM user_book WHERE user_id = 4 AND to_read_date IS NOT NULL AND is_deleted = 0)
+
+UNION ALL
+
+SELECT title, 'Reading_Bookshelf' AS category
+FROM book
+WHERE book_id IN (SELECT book_id FROM user_book WHERE user_id = 4 AND added_reading_date IS NOT NULL AND is_deleted = 0)
+
+UNION ALL
+
+SELECT title, 'Wish_Bookshelf' AS category
+FROM book
+WHERE book_id IN (SELECT book_id FROM user_book WHERE user_id = 4 AND wishlist_date IS NOT NULL AND is_deleted = 0);
+
+
     
 SELECT book.title ,book.genre ,book.pages_number ,book.cover_img AS book_cover_img , user_book.is_read_date, user_book.to_read_date, user_book.added_reading_date, user_book.wishlist_date, user_book.cover_img AS user_cover_img,  author.author_name FROM user
     JOIN user_book ON user.user_id = user_book.user_id
@@ -167,3 +185,16 @@ SELECT book.title ,book.genre ,book.pages_number ,book.cover_img AS book_cover_i
     WHERE user.is_deleted = 0
       AND book.is_deleted = 0
       AND user.user_id = 2;
+      
+      
+SELECT user_book.*, user_book.cover_img AS user_cover_img, 
+       book.title, book.genre, book.format, book.pages_number, book.publish_year, book.isbn, book.sinopsis, book.cover_img AS book_cover_img,
+       author.author_name 
+FROM user_book
+JOIN book ON user_book.book_id = book.book_id
+JOIN author ON book.author_id = author.author_id
+WHERE user_book.user_id = 4
+  AND book.book_id = 21
+  AND user_book.is_deleted = 0
+  AND book.is_deleted = 0;
+      

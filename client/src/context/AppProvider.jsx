@@ -27,7 +27,6 @@ export const AppProvider = ({ children }) => {
         .then((res) => {
           setUser(res.data.resultUser[0]);
           setBookshelf(res.data.resultBook);
-          console.log(res.data.resultBook);
           setIsLogged(true);
         })
         .catch((err) => {

@@ -14,7 +14,7 @@
 
 .userContentPpal {
   width: 100%;
-  padding: calc(4vh + 50px) 4vw 4vh 4vw;
+  padding: calc(4vh + 50px) 4vw 15vh 4vw;
   color: rgb(0, 0, 0);
   display: grid;
   grid-template:
@@ -219,12 +219,16 @@
   border-radius: 8px;
   grid-area: myBookshelfcard;
   padding: 2vh 2vw;
+  padding-top: 0;
   display: flex;
   flex-direction: column;
-  height: fit-content;
+  height: 140px!important;
+
+
 
   .titleBookshelf {
-    height: 15%;
+    margin-top: 2vh;
+    height: 40px;
 
     h3,
     hr {
@@ -234,20 +238,34 @@
     hr {
       margin-bottom: 8px;
     }
+    h3 {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      
+    }
+    button {
+      color: black;
+      border: none;
+      padding-bottom: 0;
+    }
+    button:hover {
+      background-color: transparent;
+      color: white;
+    }
   }
 
   .triptych {
     height: 85%;
     display: grid;
     grid-template: "readBook readingBook toRead whislist";
-    grid-template-columns: calc(25% - 10px) calc(25% - 10px) calc(25% - 10px) calc(
-        25% - 10px
-      );
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 100%;
-    grid-gap: 10px;
+    grid-gap: 16px;
     justify-content: space-between;
     text-align: center;
     place-items: center;
+
 
     .readBook {
       grid-area: readBook;
@@ -270,113 +288,88 @@
     .toRead,
     .whislist {
       width: 100%;
+      max-width: 200px;
       aspect-ratio: 2/3;
       background-color: $bgColorLightCream;
-      border-radius: 16px;
+      border-radius: 8px;
       display: flex;
       flex-direction: column;
       align-items: center;
       border: 1px solid black;
       position: relative;
       overflow: hidden;
+      height: 50px;
+      transition: all 1s;
+ 
+
 
       h5 {
-        position: absolute;
-        z-index: 3;
-        top:calc(50% - 0.75rem);
+        height: 50px;
+        color: black;
+        padding: 8px 0;
+        width: 100%;
+        // position: absolute;
+        // top: calc(50% - 0.75rem);
         font-size: 1.5rem;
+        background-color: $bgColorLightGreen;
+        border-bottom: 1px solid black;
+
       }
 
       .coverCont {
         height: 100%;
         aspect-ratio: 2/3;
         overflow: hidden;
-        border-radius: 8px;
+        // border-radius: 8px;
 
         img {
           width: 100%;
           height: 100%;
           object-position: center;
+          object-fit: cover;
         }
       }
       .titleCont {
-        height: fit-content;
         width: 100%;
         padding: 8px 0px;
         background-color: $bgColorLightCream;
         text-align: center;
         display: grid;
         place-items: center;
-        position: absolute;
-        bottom: 0;
+        // position: absolute;
+        // bottom: 0;
         border-radius: 0 0 8px 8px;
 
         h6 {
-          
+          height: 100%;
           margin-bottom: 0;
           font-size: 1rem;
-          padding: 8px;
+          padding: 0 8px;
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
       }
-    }
-    .readBook::before,
-    .readingBook::before,
-    .toRead::before,
-    .whislist::before,
-    .readBook::after,
-    .readingBook::after,
-    .toRead::after,
-    .whislist::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      transform: skew(32.5deg);
-      transition: all 0.8s;
-      overflow: hidden;
-      z-index: 2;
-      filter: brightness(90%);
-    }
-    .readBook::before,
-    .readingBook::before,
-    .toRead::before,
-    .whislist::before {
-      background-color: #889473;
-      left: -50%;
-    }
-    .readBook::after,
-    .readingBook::after,
-    .toRead::after,
-    .whislist::after {
-      background-color: #b4c598;
-      right: -50%;
-    }
-    .readBook:hover::before,
-    .readingBook:hover::before,
-    .toRead:hover::before,
-    .whislist:hover::before,
-    .readBook:hover::after,
-    .readingBook:hover::after,
-    .toRead:hover::after,
-    .whislist:hover::after {
-      width: 0;
     }
 
     .readBook:hover,
     .readingBook:hover,
     .toRead:hover,
     .whislist:hover {
-      transition: all 1s;
-      aspect-ratio: 2/3;
+     
       cursor: pointer;
       background-color: $bgColorLightGreen;
       font-size: x-large;
       box-shadow: $blackShadow;
       -webkit-box-shadow: $blackShadow;
       -moz-box-shadow: $blackShadow;
+      z-index: 2;
+      height: 300px;
+     
 
-      h5{
+
+      h5 {
         z-index: 0;
       }
 

@@ -27,7 +27,7 @@ export const OneBookCard = ({ oneBookSearchData, olid }) => {
       isbn: oneBookSearchData?.isbn ? oneBookSearchData?.isbn[0] : null,
       sinopsis: oneBookSearchData?.first_sentence
         ? oneBookSearchData?.first_sentence[oneBookSearchData?.first_sentence.length - 1].split('.')[0].trim()
-        : null,
+        : "Not avaliable",
       author_name: oneBookSearchData?.author_name
         ? oneBookSearchData.author_name[0]
         : "Anonimous",

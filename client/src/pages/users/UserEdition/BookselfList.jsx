@@ -12,7 +12,7 @@ export const BookselfList = ({
   titNum,
   counter,
   setCounter,
-  user_id
+  user_id,
 }) => {
   const [height, setHeight] = useState();
   const navigate = useNavigate();
@@ -28,37 +28,61 @@ export const BookselfList = ({
   }, [bookShelvesData, categ]);
 
   return (
-    <div className="contPpalLists"
-      style={{ height: height, transition: "height 0.75s  ease-in-out", overflow: "hidden" }}
+    <div
+      className="contPpalLists"
+      style={{
+        height: height,
+        transition: "height 0.75s  ease-in-out",
+        overflow: "hidden",
+      }}
     >
-      <div className="bookshlefCont">
-        <h5>{categoryTitle}</h5>
-        <h6>{counter}</h6>
-        {showTitles === titNum ? (
-          <div
-            onClick={() => {
-              setShowTitles(0);
-              setHeight("2.5rem");
-            }}
-          >
+      {showTitles === titNum ? (
+        <div
+          className="bookshlefCont"
+          onClick={() => {
+            setShowTitles(0);
+            setHeight("2.5rem");
+          }}
+        >
+          <h5>{categoryTitle}</h5>
+          <h6>{counter}</h6>
+          <div>
             <IoIosArrowUp />
           </div>
-        ) : (
+        </div>
+      ) : (
+        <div
+          className="bookshlefCont"
+          onClick={() => {
+            setShowTitles(titNum);
+            setHeight(`calc(${counter * 24}px + 2.5rem)`);
+          }}
+        >
+          <h5>{categoryTitle}</h5>
+          <h6>{counter}</h6>
           <div
-            onClick={() => {
-              setShowTitles(titNum);
-              setHeight(`calc(${counter * 24 }px + 2.5rem)`);
-            }}
+           
           >
             <IoIosArrowDown />
           </div>
-        )}
-      </div>
+        </div>
+      )}
       {showTitles === titNum && (
         <ol>
           {bookShelvesData?.map((element, index) => {
             if (element.category === categ) {
-              return <li key={index} onClick={()=>navigate(`/userBooks/oneBook/${element.book_id}/${user_id}`)}>{element.title}</li>;
+              return (
+                <li
+                  key={index}
+                  onClick={() =>
+                    navigate(
+                      `/userBooks/oneBookEdition/${element.book_id}/${user_id}`
+                    )
+                  }
+                >
+                  {element.title}
+                </li>
+              );
             }
           })}
         </ol>
